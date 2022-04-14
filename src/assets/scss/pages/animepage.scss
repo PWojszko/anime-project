@@ -1,0 +1,120 @@
+.anime-page {
+  .anime-page__article {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 25px 15px;
+
+    .anime-page__watermark {
+      position: absolute;
+      left: 0;
+      font-size: 200px;
+      color: rgba($color-light-1, 0.05);
+      z-index: -1;
+      transform: rotate(15deg);
+      pointer-events: none;
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+
+    .anime-page__content {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 25px;
+      column-gap: 50px;
+      margin-bottom: 50px;
+
+      .anime-page__content-part {
+        .anime-page__title {
+        }
+        .anime-page__text {
+        }
+      }
+
+      .anime-page__image-container {
+        position: relative;
+        border: 2px solid $color-1;
+        .anime-page__image {
+          position: relative;
+          padding: 10px;
+          margin: 0 0 -20px -20px;
+        }
+      }
+    }
+
+    .anime-page__character-list {
+      display: flex;
+      margin-bottom: 50px;
+      column-gap: 80px;
+      overflow-x: hidden;
+      padding-bottom: 20px;
+
+      .anime-page__character-item {
+        position: relative;
+        border: 2px solid $color-1;
+        border-right: none;
+        padding: 20px 0 20px 20px;
+        margin: 20px 0;
+
+        .anime-page__character-text {
+          .anime-page__character-title {
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            padding-left: 10px;
+            transform: translate(0, -50%);
+
+            font-size: 2rem;
+            background-color: $color-dark-2;
+          }
+          .anime-page__character-subtitle {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+
+            padding-left: 10px;
+            transform: translate(0, 50%);
+
+            text-align: right;
+            font-size: 1.3rem;
+            background-color: $color-dark-2;
+          }
+        }
+
+        .anime-page__character-image {
+        }
+
+        &:hover {
+        }
+      }
+    }
+
+    .anime-page__parameter-list {
+      display: flex;
+      justify-content: space-between;
+      column-gap: 30px;
+      row-gap: 15px;
+      padding: 25px;
+
+      background-color: $color-dark-2;
+
+      .anime-page__parameter-item {
+        .anime-page-parameter-title {
+        }
+        .anime-page-parameter-subtitle {
+        }
+      }
+    }
+
+    .anime-page__video {
+      iframe {
+        width: 100%;
+        min-height: 642px;
+        border: none;
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// import Navigation from "./Navigation.tsx";
+import Navigation from "./Navigation";
 
 const Header = () => {
   return (
@@ -11,7 +11,7 @@ const Header = () => {
           Ani <span className="header__logo--bold">me</span>
         </div>
       </Link>
-      {/* <Navigation /> */}
+      <Navigation />
     </header>
   );
 };

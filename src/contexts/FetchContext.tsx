@@ -18,7 +18,7 @@ type Data = {
   };
 };
 
-type FechValue = {
+type FetchValue = {
   animeById?: Data[] | null;
   animeCharacters?: Data[] | null;
   topAnime?: Data[] | null;
@@ -30,7 +30,7 @@ type FechValue = {
   getRandomAnime?: () => void;
 };
 
-export const FetchContext = createContext<FechValue | undefined>(undefined);
+export const FetchContext = createContext<FetchValue | undefined>(undefined);
 
 type Props = {
   children: ReactNode;
@@ -41,25 +41,27 @@ const FetchContextProvider = ({ children }: Props) => {
   const [currentAnime, setCurrentAnime] = useState<Data[] | null>(null);
   const [animeById, setAnimeById] = useState<Data[] | null>(null);
   const [animeCharacters, setAnimeCharacters] = useState<Data[] | null>(null);
-  const [randomAnime, setRandomAnime] = useState<Data[] | null>(null);
   const location = useLocation().pathname;
 
   useEffect(() => {
-    axios.get("https://api.jikan.moe/v4/top/anime").then((response) => {
-      setTopAnime(response.data.data);
-    });
     axios.get("https://api.jikan.moe/v4/seasons/now").then((response) => {
       setCurrentAnime(response.data.data);
     });
-    axios.get(`https://api.jikan.moe/v4${location}`).then((response) => {
-      setAnimeById(response.data.data);
+    axios.get("https://api.jikan.moe/v4/top/anime").then((response) => {
+      setTopAnime(response.data.data);
     });
-    axios
-      .get(`https://api.jikan.moe/v4${location}/characters`)
-      .then((response) => {
-        setAnimeCharacters(response.data.data);
-      });
   }, []);
+
+  // if (location !== "/") {
+  //   axios.get(`https://api.jikan.moe/v4${location}`).then((response) => {
+  //     setAnimeById(response.data.data);
+  //   });
+  //   axios
+  //     .get(`https://api.jikan.moe/v4${location}/characters`)
+  //     .then((response) => {
+  //       setAnimeCharacters(response.data.data);
+  //     });
+  // }
 
   return (
     <FetchContext.Provider
@@ -68,7 +70,6 @@ const FetchContextProvider = ({ children }: Props) => {
         animeCharacters,
         topAnime,
         currentAnime,
-        randomAnime,
       }}
     >
       {children}

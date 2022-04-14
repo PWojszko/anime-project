@@ -1,12 +1,15 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
-import FetchContextProvider from "../contexts/FetchContext";
+import { useFetchContext } from "../contexts/FetchContext";
+import { useAuthContext } from "../contexts/AuthContext";
 
 import Header from "./Header";
 import { HomePage } from "../pages/HomePage";
+import LoginPage from "../pages/LoginPage";
 
 function App() {
+  const { isAuth } = useAuthContext();
   return (
     <>
       <Header />
@@ -16,8 +19,8 @@ function App() {
         {/* <Route path="/signup">
           {isAuth ? <Redirect to="/" /> : <Signup />}
         </Route> */}
-        {/* <Route path="/login">{isAuth ? <Redirect to="/" /> : <Login />}</Route>
-        <Route path="/userpanel">
+        <Route path="/login" element={<LoginPage />} />
+        {/* <Route path="/userpanel">
           {!isAuth ? <Redirect to="/" /> : <UserPanel />}
         </Route> */}
       </Routes>

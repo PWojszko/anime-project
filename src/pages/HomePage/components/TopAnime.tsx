@@ -1,7 +1,6 @@
-import React from "react";
-import { useState, useRef } from "react";
-import { useDraggable } from "react-use-draggable-scroll";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import { useDraggable } from "react-use-draggable-scroll";
 
 import { useFetchContext } from "../../../contexts/FetchContext";
 
@@ -13,9 +12,9 @@ function TopAnime() {
   });
 
   const TopAnimeList = topAnime?.map((anime) => (
-    <Link key={anime.mal_id} to={`/anime/${anime.mal_id}`}>
+    <Link key={anime?.mal_id} to={`/anime/${anime?.mal_id}`}>
       <div className="carousel__item">
-        <p className="carousel__item-title">{anime.title}</p>
+        <p className="carousel__item-title">{anime?.title}</p>
         <img
           className="carousel__item-image"
           src={anime?.images?.webp?.image_url}

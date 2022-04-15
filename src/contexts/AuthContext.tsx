@@ -25,7 +25,7 @@ type Data = {
   };
 };
 
-type FechValue = {
+type AuthValue = {
   currentUser?: string | null;
   isAuth?: boolean | null;
   register: (email: string, password: string, passwordConfirm: string) => void;
@@ -33,7 +33,7 @@ type FechValue = {
   logout: () => void;
 };
 
-export const AuthContext = createContext<FechValue | undefined>(undefined);
+export const AuthContext = createContext<AuthValue | undefined>(undefined);
 
 export function useAuth() {
   return useContext(AuthContext);
@@ -55,16 +55,18 @@ export const AuthProvider = ({ children }: Props) => {
     authObserver();
   }, []);
 
-  function register(email: string, password: string) {
+  function register(email: string, password: string, passwordConfirm?: string) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        console.log("created");
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log("creation fail");
         // ..
       });
   }
@@ -74,11 +76,13 @@ export const AuthProvider = ({ children }: Props) => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        console.log("logged in");
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log("login fail");
         // ..
       });
   }

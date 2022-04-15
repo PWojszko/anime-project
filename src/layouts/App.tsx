@@ -7,6 +7,7 @@ import { useAuthContext } from "../contexts/AuthContext";
 import Header from "./Header";
 import { HomePage } from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
 
 function App() {
   const { isAuth } = useAuthContext();
@@ -20,6 +21,7 @@ function App() {
           {isAuth ? <Redirect to="/" /> : <Signup />}
         </Route> */}
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<RegisterPage />} />
         {/* <Route path="/userpanel">
           {!isAuth ? <Redirect to="/" /> : <UserPanel />}
         </Route> */}

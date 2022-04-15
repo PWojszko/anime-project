@@ -28,7 +28,7 @@ type Data = {
 type FechValue = {
   currentUser?: string | null;
   isAuth?: boolean | null;
-  signup: (email: string, password: string) => void;
+  register: (email: string, password: string, passwordConfirm: string) => void;
   login: (email: string, password: string) => void;
   logout: () => void;
 };
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }: Props) => {
     authObserver();
   }, []);
 
-  function signup(email: string, password: string) {
+  function register(email: string, password: string) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
@@ -107,7 +107,7 @@ export const AuthProvider = ({ children }: Props) => {
 
   return (
     <AuthContext.Provider
-      value={{ currentUser, isAuth, signup, login, logout }}
+      value={{ currentUser, isAuth, register, login, logout }}
     >
       {children}
     </AuthContext.Provider>

@@ -5,6 +5,7 @@ import { useFetchContext } from "../contexts/FetchContext";
 import { useAuthContext } from "../contexts/AuthContext";
 
 import Header from "./Header";
+import Footer from "./Footer";
 import { HomePage } from "../pages/HomePage";
 import { AnimePage } from "../pages/AnimePage";
 import LoginPage from "../pages/LoginPage";
@@ -22,11 +23,12 @@ function App() {
           {isAuth ? <Redirect to="/" /> : <Signup />}
         </Route> */}
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<RegisterPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         {/* <Route path="/userpanel">
           {!isAuth ? <Redirect to="/" /> : <UserPanel />}
         </Route> */}
       </Routes>
+      <Footer />
     </>
   );
 }

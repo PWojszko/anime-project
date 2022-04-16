@@ -36,10 +36,10 @@ function AnimePageContent() {
   const watermark = animeById?.title_japanese && animeById?.title_japanese;
 
   const parametersList = [
-    { text: "Type: ", api: animeById?.type },
-    { text: "Episodes: ", api: animeById?.episodes },
-    { text: "Score: ", api: animeById?.score },
-    { text: "Year: ", api: animeById?.year },
+    { text: "Type", api: animeById?.type },
+    { text: "Episodes", api: animeById?.episodes },
+    { text: "Score", api: animeById?.score },
+    { text: "Year", api: animeById?.year },
   ];
 
   const parametersListMap = parametersList?.map((parameter, id) =>

@@ -34,11 +34,11 @@
       border-radius: $radius;
       transition: all 0.3s;
       transform: scale(0.9);
+      overflow: hidden;
 
       .carousel__item-image {
         height: 320px;
         width: 225px;
-        border-radius: $radius;
         transition: all 0.3s;
       }
 
@@ -75,6 +75,7 @@
 
         .carousel__item-image {
           filter: brightness(0.4);
+          transform: scale(1.1);
         }
       }
     }

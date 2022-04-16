@@ -42,7 +42,7 @@ const Navigation = () => {
               <span className="button__subtitle">Log in</span>
             </button>
           </Link>
-          <Link to="/signup">
+          <Link to="/register">
             <button className="button header__register-button">
               <span className="button__title">Sign in</span>
               <span className="button__subtitle">Sign in</span>

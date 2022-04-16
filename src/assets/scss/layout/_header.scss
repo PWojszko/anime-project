@@ -9,7 +9,8 @@
   padding: 15px 25px;
   z-index: 1;
 
-  background-color: $color-dark-1;
+  background-color: rgba($color-dark-1, 0.7);
+  backdrop-filter: blur(3px);
 
   .header__logo {
     font-size: 30px;
@@ -46,7 +47,6 @@
           & + .search__list {
             display: block;
             opacity: 1;
-            transition: all 0.3s;
           }
         }
       }
@@ -55,16 +55,20 @@
         display: none;
         z-index: 1;
         margin-right: 25px;
+        margin-top: 19px;
         opacity: 0;
-        transition: all 0.3s;
 
         li {
           list-style: none;
           padding: 5px 15px;
-          background-color: $color-dark-2;
+          background-color: rgba($color-dark-1, 0.7);
           a {
             color: $color-light-1;
           }
+        }
+
+        &:hover {
+          display: block;
         }
       }
     }

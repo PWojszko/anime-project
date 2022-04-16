@@ -34,16 +34,29 @@ export default function RegisterPage() {
       <h1>Create account</h1>
       <form onSubmit={hadleCreateAccount}>
         <label>
-          Email
-          <input type="email" ref={emailRef} required autoFocus />
+          <input
+            type="email"
+            ref={emailRef}
+            required
+            placeholder="Email"
+            autoFocus
+          />
         </label>
         <label>
-          Password
-          <input type="password" ref={passwordRef} required />
+          <input
+            type="password"
+            ref={passwordRef}
+            required
+            placeholder="Password"
+          />
         </label>
         <label>
-          Password Confirmation
-          <input type="password" ref={passwordConfirmRef} required />
+          <input
+            type="password"
+            ref={passwordConfirmRef}
+            required
+            placeholder="Repeat Password"
+          />
         </label>
         <button type="submit">Sign up</button>
       </form>

@@ -6,6 +6,7 @@ import { useAuthContext } from "../contexts/AuthContext";
 
 import Header from "./Header";
 import { HomePage } from "../pages/HomePage";
+import { AnimePage } from "../pages/AnimePage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 
@@ -16,7 +17,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        {/* <Route path="/anime/:id" element={AnimePage} /> */}
+        <Route path="/anime/:id" element={<AnimePage />} />
         {/* <Route path="/signup">
           {isAuth ? <Redirect to="/" /> : <Signup />}
         </Route> */}

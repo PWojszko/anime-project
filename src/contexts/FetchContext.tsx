@@ -8,6 +8,18 @@ import React, {
 } from "react";
 import { useLocation } from "react-router-dom";
 
+type AnimeByIdType = {
+  images?: { webp: { image_url: string } };
+  trailer?: { embed_url: string };
+  title_japanese?: string;
+  type?: string;
+  episodes?: number;
+  score?: number;
+  year?: number;
+  title?: string;
+  synopsis?: string;
+};
+
 type Data = {
   title?: string;
   mal_id?: number;
@@ -19,15 +31,13 @@ type Data = {
 };
 
 type FetchValue = {
-  animeById?: Data[] | null;
-  animeCharacters?: Data[] | null;
-  topAnime?: Data[] | null;
-  currentAnime?: Data[] | null;
-  randomAnime?: Data[] | null;
+  animeById?: AnimeByIdType | null | undefined;
+  animeCharacters?: any | null | undefined;
+  topAnime?: Data[] | null | undefined;
+  currentAnime?: Data[] | null | undefined;
   getCurrentAnime?: () => void;
-  getAnimeById?: (location: string) => void;
-  getAnimeCharacters?: (location: string) => void;
-  getRandomAnime?: () => void;
+  getAnimeById?: (location: number) => void;
+  getAnimeCharacters?: (location: number) => void;
 };
 
 export const FetchContext = createContext<FetchValue | undefined>(undefined);
@@ -39,9 +49,10 @@ type Props = {
 const FetchContextProvider = ({ children }: Props) => {
   const [topAnime, setTopAnime] = useState<Data[] | null>(null);
   const [currentAnime, setCurrentAnime] = useState<Data[] | null>(null);
-  const [animeById, setAnimeById] = useState<Data[] | null>(null);
+  const [animeById, setAnimeById] = useState<AnimeByIdType | null>(null);
   const [animeCharacters, setAnimeCharacters] = useState<Data[] | null>(null);
-  const location = useLocation().pathname;
+
+  // const location = useLocation().pathname;
 
   useEffect(() => {
     axios.get("https://api.jikan.moe/v4/seasons/now").then((response) => {
@@ -52,16 +63,19 @@ const FetchContextProvider = ({ children }: Props) => {
     });
   }, []);
 
-  // if (location !== "/") {
-  //   axios.get(`https://api.jikan.moe/v4${location}`).then((response) => {
-  //     setAnimeById(response.data.data);
-  //   });
-  //   axios
-  //     .get(`https://api.jikan.moe/v4${location}/characters`)
-  //     .then((response) => {
-  //       setAnimeCharacters(response.data.data);
-  //     });
-  // }
+  function getAnimeById(location: number) {
+    axios.get(`https://api.jikan.moe/v4/anime/${location}`).then((response) => {
+      setAnimeById(response.data.data);
+    });
+  }
+
+  function getAnimeCharacters(location: number) {
+    axios
+      .get(`https://api.jikan.moe/v4/anime/${location}/characters`)
+      .then((response) => {
+        setAnimeCharacters(response.data.data);
+      });
+  }
 
   return (
     <FetchContext.Provider
@@ -70,6 +84,8 @@ const FetchContextProvider = ({ children }: Props) => {
         animeCharacters,
         topAnime,
         currentAnime,
+        getAnimeById,
+        getAnimeCharacters,
       }}
     >
       {children}

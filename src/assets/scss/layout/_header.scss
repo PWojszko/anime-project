@@ -41,11 +41,22 @@
         border: none;
         padding: 10px 15px;
         color: $color-light-1;
+
+        &:focus {
+          & + .search__list {
+            display: block;
+            opacity: 1;
+            transition: all 0.3s;
+          }
+        }
       }
       .search__list {
         position: absolute;
+        display: none;
         z-index: 1;
         margin-right: 25px;
+        opacity: 0;
+        transition: all 0.3s;
 
         li {
           list-style: none;

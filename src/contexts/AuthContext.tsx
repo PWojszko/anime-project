@@ -60,13 +60,13 @@ export const AuthProvider = ({ children }: Props) => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log("created");
+        console.log("created " + email, password, passwordConfirm);
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log("creation fail");
+        console.log("creation fail " + email, password, passwordConfirm);
         // ..
       });
   }
@@ -76,13 +76,13 @@ export const AuthProvider = ({ children }: Props) => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log("logged in");
+        console.log("logged " + email, password);
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log("login fail");
+        console.log("login fail " + email, password);
         // ..
       });
   }

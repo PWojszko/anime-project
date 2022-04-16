@@ -6,10 +6,10 @@ import { useAuthContext } from "../../contexts/AuthContext";
 export default function RegisterPage() {
   const { register, isAuth } = useAuthContext();
 
-  const ref = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const emailRef = ref;
-  const passwordRef = ref;
-  const passwordConfirmRef = ref;
+  const emailRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const passwordRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const passwordConfirmRef =
+    useRef() as React.MutableRefObject<HTMLInputElement>;
 
   function hadleCreateAccount(e: { preventDefault: () => void }) {
     e.preventDefault();
@@ -30,25 +30,23 @@ export default function RegisterPage() {
   });
 
   return (
-    <div>
-      <div>
-        <p>Create account</p>
-        <form onSubmit={hadleCreateAccount}>
-          <label>
-            Email
-            <input type="email" ref={emailRef} required />
-          </label>
-          <label>
-            Password
-            <input type="password" ref={passwordRef} required />
-          </label>
-          <label>
-            Password Confirmation
-            <input type="password" ref={passwordConfirmRef} required />
-          </label>
-          <button type="submit">Sign up</button>
-        </form>
-      </div>
+    <div className="register-page">
+      <h1>Create account</h1>
+      <form onSubmit={hadleCreateAccount}>
+        <label>
+          Email
+          <input type="email" ref={emailRef} required autoFocus />
+        </label>
+        <label>
+          Password
+          <input type="password" ref={passwordRef} required />
+        </label>
+        <label>
+          Password Confirmation
+          <input type="password" ref={passwordConfirmRef} required />
+        </label>
+        <button type="submit">Sign up</button>
+      </form>
     </div>
   );
 }

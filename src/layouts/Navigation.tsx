@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 
-// import SearchAnime from "../components/SearchAnime.tsx";
+import SearchBar from "../components/SearchBar";
 // import { useAuth } from "../contexts/AuthContext.tsx";
 
 import { useAuthContext } from "../contexts/AuthContext";
@@ -56,7 +56,7 @@ const Navigation = () => {
   return (
     <nav className="header__nav">
       {navButtons}
-      {/* <SearchAnime /> */}
+      <SearchBar />
     </nav>
   );
 };

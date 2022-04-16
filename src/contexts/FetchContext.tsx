@@ -32,7 +32,7 @@ type Data = {
 
 type FetchValue = {
   animeById?: AnimeByIdType | null | undefined;
-  animeCharacters?: any | null | undefined;
+  animeCharacters?: any | null | undefined; // need types
   topAnime?: Data[] | null | undefined;
   currentAnime?: Data[] | null | undefined;
   getCurrentAnime?: () => void;
@@ -51,8 +51,6 @@ const FetchContextProvider = ({ children }: Props) => {
   const [currentAnime, setCurrentAnime] = useState<Data[] | null>(null);
   const [animeById, setAnimeById] = useState<AnimeByIdType | null>(null);
   const [animeCharacters, setAnimeCharacters] = useState<Data[] | null>(null);
-
-  // const location = useLocation().pathname;
 
   useEffect(() => {
     axios.get("https://api.jikan.moe/v4/seasons/now").then((response) => {

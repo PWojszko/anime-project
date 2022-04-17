@@ -58,18 +58,24 @@ function AnimePageContent() {
         key={character?.character.mal_id}
       >
         <div className="anime-page__character-text">
-          <p className="anime-page__character-title">
-            {character?.character.name}
-          </p>
-          <p className="anime-page__character-subtitle">
-            Voice actor: {animeCharacters[0]?.voice_actors[0]?.person.name}
-          </p>
+          <div className="anime-page__title-container">
+            <div className="anime-page__line"></div>
+            <p className="anime-page__character-title">
+              {character?.character.name}
+            </p>
+          </div>
+          <img
+            className="anime-page__character-image"
+            src={character.character?.images.webp.image_url}
+            alt={character.character?.name}
+          />
+          <div className="anime-page__subtitle-container">
+            <div className="anime-page__line"></div>
+            <p className="anime-page__character-subtitle">
+              Voice actor: {animeCharacters[0]?.voice_actors[0]?.person.name}
+            </p>
+          </div>
         </div>
-        <img
-          className="anime-page__character-image"
-          src={character.character?.images.webp.image_url}
-          alt={character.character?.name}
-        />
       </div>
     ) : null
   );

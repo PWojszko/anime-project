@@ -3,24 +3,21 @@
   margin-bottom: 30px;
 
   .carousel__title-container {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
     position: relative;
     margin: 20px 10px 20px 10px;
 
     .carousel__title {
       padding-bottom: 10px;
       writing-mode: vertical-rl;
-      background-color: $color-dark-2;
+    }
 
-      &::after {
-        content: "";
-        display: block;
-        position: absolute;
-        width: 2px;
-        height: 100%;
-        left: 50%;
-        z-index: -1;
-        background: $color-1;
-      }
+    .carousel__line {
+      flex: 1;
+      background-color: $color-1;
+      width: 2px;
     }
   }
 

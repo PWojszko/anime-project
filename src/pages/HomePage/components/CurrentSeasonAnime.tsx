@@ -28,6 +28,7 @@ function CurrentSeasonAnime() {
     <div className="carousel">
       <div className="carousel__title-container">
         <h2 className="carousel__title">Current season</h2>
+        <div className="carousel__line"></div>
       </div>
       <div className="carousel__list" {...events} ref={ref}>
         {currentAnimeList}

@@ -53,38 +53,40 @@
 
       .anime-page__character-item {
         position: relative;
-        border: 2px solid $color-1;
-        border-right: none;
-        padding: 20px 0 20px 20px;
+        border-left: 2px solid $color-1;
         margin: 20px 0;
 
         .anime-page__character-text {
-          .anime-page__character-title {
-            position: absolute;
-            top: 0;
-            right: 0;
-
-            padding-left: 10px;
-            transform: translate(0, -50%);
-
-            font-size: 2rem;
-            background-color: $color-dark-2;
+          .anime-page__title-container {
+            display: flex;
+            place-items: center;
+            transform: translate(-2px, -50%);
+            .anime-page__line {
+              flex: 1;
+              height: 2px;
+              background-color: $color-1;
+            }
+            .anime-page__character-title {
+              padding-left: 10px;
+            }
           }
-          .anime-page__character-subtitle {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-
-            padding-left: 10px;
-            transform: translate(0, 50%);
-
-            text-align: right;
-            font-size: 1.3rem;
-            background-color: $color-dark-2;
+          .anime-page__subtitle-container {
+            display: flex;
+            place-items: center;
+            transform: translate(-2px, 50%);
+            .anime-page__line {
+              flex: 1;
+              height: 2px;
+              background-color: $color-1;
+            }
+            .anime-page__character-subtitle {
+              padding-left: 10px;
+            }
           }
         }
 
         .anime-page__character-image {
+          padding-left: 20px;
         }
 
         &:hover {
@@ -100,7 +102,6 @@
       padding: 25px 0 0 0;
 
       text-align: center;
-      background-color: $color-dark-2;
 
       .anime-page__parameter-item {
         padding: 20px;

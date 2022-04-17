@@ -81,6 +81,7 @@
             }
             .anime-page__character-subtitle {
               padding-left: 10px;
+              font-size: 1.2rem;
             }
           }
         }
@@ -118,7 +119,6 @@
     .anime-page__video {
       position: relative;
       padding: 20px 0 0 20px;
-      // border-left: 1px solid $color-1;
       &::before {
         content: "";
         position: absolute;

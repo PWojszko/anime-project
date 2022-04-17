@@ -54,16 +54,27 @@
         position: absolute;
         display: none;
         z-index: 1;
-        margin-right: 25px;
         margin-top: 19px;
         opacity: 0;
+        background-color: rgba($color-dark-1, 0.7);
+        min-height: 100vh;
 
         li {
           list-style: none;
           padding: 5px 15px;
-          background-color: rgba($color-dark-1, 0.7);
+          margin-bottom: 10px;
+
           a {
+            display: block;
+            padding: 20px;
+            border-radius: $radius;
             color: $color-light-1;
+            background-color: rgba($color-dark-2, 0.7);
+            transition: all 0.3s;
+
+            &:hover {
+              background-color: rgba($color-dark-2, 1);
+            }
           }
         }
 

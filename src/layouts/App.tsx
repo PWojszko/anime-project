@@ -20,9 +20,6 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/anime/:id" element={<AnimePage />} />
-        {/* <Route path="/signup">
-          {isAuth ? <Redirect to="/" /> : <Signup />}
-        </Route> */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/userpanel" element={<UserPanelPage />} />

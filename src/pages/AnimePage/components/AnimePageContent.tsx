@@ -12,7 +12,6 @@ function AnimePageContent() {
   const { events } = useDraggable(ref, {
     applyRubberBandEffect: true,
   });
-  let { id } = useParams();
 
   const image = animeById?.images && (
     <div className="anime-page__image-container">
@@ -51,41 +50,38 @@ function AnimePageContent() {
     ) : null
   );
 
-  const animeCharactersMap = animeCharacters?.map((character: any) =>
-    character?.role === "Main" ? (
-      <div className="anime-page__character-container">
-        <div
-          className="anime-page__character-item"
-          key={character?.character.mal_id}
-        >
-          <div className="anime-page__character-text">
-            <div className="anime-page__title-container">
-              <div className="anime-page__line"></div>
-              <p className="anime-page__character-title">
-                {character?.character.name}
-              </p>
-            </div>
-            <img
-              className="anime-page__character-image"
-              src={character.character?.images.webp.image_url}
-              alt={character.character?.name}
-            />
-            <div className="anime-page__subtitle-container">
-              <div className="anime-page__line"></div>
-              <p className="anime-page__character-subtitle">
-                Voice actor: {animeCharacters[0]?.voice_actors[0]?.person.name}
-              </p>
+  const animeCharactersMap = animeCharacters?.map(
+    (character: any, id: number) =>
+      character?.role === "Main" ? (
+        <div key={id} className="anime-page__character-container">
+          <div
+            className="anime-page__character-item"
+            key={character?.character.mal_id}
+          >
+            <div className="anime-page__character-text">
+              <div className="anime-page__title-container">
+                <div className="anime-page__line"></div>
+                <p className="anime-page__character-title">
+                  {character?.character.name}
+                </p>
+              </div>
+              <img
+                className="anime-page__character-image"
+                src={character.character?.images.webp.image_url}
+                alt={character.character?.name}
+              />
+              <div className="anime-page__subtitle-container">
+                <div className="anime-page__line"></div>
+                <p className="anime-page__character-subtitle">
+                  Voice actor:{" "}
+                  {animeCharacters[0]?.voice_actors[0]?.person.name}
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    ) : null
+      ) : null
   );
-
-  useEffect(() => {
-    getAnimeById?.(Number(id));
-    getAnimeCharacters?.(Number(id));
-  }, []);
 
   return (
     <article className="anime-page__article">

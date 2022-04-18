@@ -6,7 +6,7 @@ import React, {
   ReactNode,
   useContext,
 } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 type AnimeByIdType = {
   images?: { webp: { image_url: string } };
@@ -38,6 +38,7 @@ type FetchValue = {
   getCurrentAnime?: () => void;
   getAnimeById?: (location: number) => void;
   getAnimeCharacters?: (location: number) => void;
+  setAnimeById: any;
 };
 
 export const FetchContext = createContext<FetchValue | undefined>(undefined);
@@ -51,6 +52,12 @@ const FetchContextProvider = ({ children }: Props) => {
   const [currentAnime, setCurrentAnime] = useState<Data[] | null>(null);
   const [animeById, setAnimeById] = useState<AnimeByIdType | null>(null);
   const [animeCharacters, setAnimeCharacters] = useState<Data[] | null>(null);
+
+  let { id } = useParams();
+  let location = useLocation();
+  let locationNumber = Number(
+    location.pathname.slice(Number("/anime/".length))
+  );
 
   useEffect(() => {
     axios.get("https://api.jikan.moe/v4/seasons/now").then((response) => {
@@ -66,6 +73,9 @@ const FetchContextProvider = ({ children }: Props) => {
       setAnimeById(response.data.data);
     });
   }
+  if (locationNumber) {
+    getAnimeById?.(Number(locationNumber));
+  }
 
   function getAnimeCharacters(location: number) {
     axios
@@ -73,6 +83,9 @@ const FetchContextProvider = ({ children }: Props) => {
       .then((response) => {
         setAnimeCharacters(response.data.data);
       });
+  }
+  if (locationNumber) {
+    getAnimeCharacters?.(Number(locationNumber));
   }
 
   return (
@@ -84,6 +97,7 @@ const FetchContextProvider = ({ children }: Props) => {
         currentAnime,
         getAnimeById,
         getAnimeCharacters,
+        setAnimeById,
       }}
     >
       {children}

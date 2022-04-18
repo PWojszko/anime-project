@@ -1,15 +1,18 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { useFetchContext } from "../contexts/FetchContext";
+import AnimePageContent from "../pages/AnimePage/components/AnimePageContent";
 
 const SearchBar = () => {
-  const { getAnimeById } = useFetchContext();
+  const { animeById, animeCharacters, getAnimeById, getAnimeCharacters } =
+    useFetchContext();
 
   const [searchValue, setSearchValue] = useState("");
   const [searchedAnime, setSearchedAnime] = useState([]);
-  const [isSearchResultVisible, setIsSearchResultVisible] = useState(false);
+  let location = useLocation();
 
   interface searchResultInterface {
     mal_id: number;
@@ -29,11 +32,9 @@ const SearchBar = () => {
         `https://api.jikan.moe/v4/anime?q=${searchValue}`
       ).then((res) => res.json());
       setSearchedAnime(temp.data.slice(0, 5));
-      setIsSearchResultVisible(true);
     };
     searchAnime();
   };
-  // needs disable results system
 
   const searchedAnimeList = searchedAnime?.map(
     (anime: searchResultInterface) => (

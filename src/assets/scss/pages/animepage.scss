@@ -47,50 +47,58 @@
     .anime-page__character-list {
       display: flex;
       margin-bottom: 50px;
-      column-gap: 80px;
       overflow-x: hidden;
       padding-bottom: 20px;
+      margin: 0 -20px;
 
-      .anime-page__character-item {
-        position: relative;
-        border-left: 2px solid $color-1;
-        margin: 20px 0;
+      .anime-page__character-container {
+        display: flex;
+        flex: 1 0 25%;
+        justify-content: center;
+        padding: 0 15px;
+        max-width: calc(1200px / 4);
 
-        .anime-page__character-text {
-          .anime-page__title-container {
-            display: flex;
-            place-items: center;
-            transform: translate(-2px, -50%);
-            .anime-page__line {
-              flex: 1;
-              height: 2px;
-              background-color: $color-1;
+        .anime-page__character-item {
+          position: relative;
+          border-left: 2px solid $color-1;
+          margin: 20px 0;
+
+          .anime-page__character-text {
+            .anime-page__title-container {
+              display: flex;
+              place-items: center;
+              transform: translate(-2px, -50%);
+              .anime-page__line {
+                flex: 1;
+                height: 2px;
+                background-color: $color-1;
+              }
+              .anime-page__character-title {
+                padding-left: 10px;
+              }
             }
-            .anime-page__character-title {
-              padding-left: 10px;
+            .anime-page__subtitle-container {
+              display: flex;
+              place-items: center;
+              transform: translate(-2px, 50%);
+              .anime-page__line {
+                flex: 1;
+                height: 2px;
+                background-color: $color-1;
+              }
+              .anime-page__character-subtitle {
+                padding-left: 10px;
+                font-size: 1.2rem;
+              }
             }
           }
-          .anime-page__subtitle-container {
-            display: flex;
-            place-items: center;
-            transform: translate(-2px, 50%);
-            .anime-page__line {
-              flex: 1;
-              height: 2px;
-              background-color: $color-1;
-            }
-            .anime-page__character-subtitle {
-              padding-left: 10px;
-              font-size: 1.2rem;
-            }
+
+          .anime-page__character-image {
+            padding-left: 20px;
           }
-        }
 
-        .anime-page__character-image {
-          padding-left: 20px;
-        }
-
-        &:hover {
+          &:hover {
+          }
         }
       }
     }

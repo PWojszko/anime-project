@@ -1,17 +1,27 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { useDraggable } from "react-use-draggable-scroll";
+import { useAuthContext } from "../../../contexts/AuthContext";
 
 import { useFetchContext } from "../../../contexts/FetchContext";
 
-function AnimePageContent() {
-  const { animeById, animeCharacters, getAnimeById, getAnimeCharacters } =
-    useFetchContext();
+const AnimePageContent = () => {
+  const { animeById, animeCharacters } = useFetchContext();
+  const { didUserWatchedAnime } = useAuthContext();
   const ref = useRef() as React.MutableRefObject<HTMLInputElement>;
   const { events } = useDraggable(ref, {
     applyRubberBandEffect: true,
   });
+  const [isWatched, setIsWatched] = useState(false);
+
+  const clickHandler = () => {
+    if (animeById?.mal_id) {
+      const { mal_id } = animeById;
+      didUserWatchedAnime(mal_id, !isWatched);
+    }
+    setIsWatched((prev) => !prev);
+  };
 
   const image = animeById?.images && (
     <div className="anime-page__image-container">
@@ -93,6 +103,7 @@ function AnimePageContent() {
         </div>
         {image}
       </div>
+      <button onClick={clickHandler}>Watched</button>
 
       <div className="anime-page__character-list" {...events} ref={ref}>
         {animeCharactersMap}
@@ -101,6 +112,6 @@ function AnimePageContent() {
       <div className="anime-page__video">{youtube}</div>
     </article>
   );
-}
+};
 
 export default AnimePageContent;

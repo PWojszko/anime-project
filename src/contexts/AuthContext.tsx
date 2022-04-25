@@ -12,8 +12,17 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
+import {
+  getDatabase,
+  ref,
+  child,
+  push,
+  update,
+  set,
+  onValue,
+} from "firebase/database";
+
 import { auth } from "../firebase";
-import { useLocation } from "react-router-dom";
 
 type Data = {
   title?: string;
@@ -31,6 +40,7 @@ type AuthValue = {
   register: (email: string, password: string, passwordConfirm: string) => void;
   login: (email: string, password: string) => void;
   logout: () => void;
+  didUserWatchedAnime: (id: number, isWatched: boolean) => void;
 };
 
 export const AuthContext = createContext<AuthValue | undefined>(undefined);
@@ -48,12 +58,42 @@ export const AuthProvider = ({ children }: Props) => {
     null
   );
   const [isAuth, setIsAuth] = useState<boolean | null>(null);
-
-  //   useEffect(() => {}, []);
+  const [userInfo, setUserInfo] = useState();
 
   useEffect(() => {
     authObserver();
   }, []);
+
+  function writeUserData(userId: string, email: string, password: string) {
+    const db = getDatabase();
+    set(ref(db, "users/" + userId), {
+      email: email,
+      password: password,
+    });
+  }
+
+  function didUserWatchedAnime(AnimeId: number, isWatched: boolean) {
+    const db = getDatabase();
+    const newUserKey = push(child(ref(db), "users")).key;
+    const user = auth?.currentUser?.uid;
+
+    const userData = {
+      AnimeId: [123, 1234],
+    };
+
+    const updates: any = {};
+    updates["users/" + user + "/watched"] = userData;
+
+    const watchedAnimeRef = ref(db, "users/");
+    onValue(watchedAnimeRef, (snapshot) => {
+      const data = snapshot.val();
+      // updateWatchedAnimeRef(postElement, data);
+      setUserInfo(data);
+      console.log(userInfo);
+    });
+
+    return update(ref(db), updates);
+  }
 
   function register(email: string, password: string, passwordConfirm?: string) {
     createUserWithEmailAndPassword(auth, email, password)
@@ -61,13 +101,12 @@ export const AuthProvider = ({ children }: Props) => {
         // Signed in
         const user = userCredential.user;
         console.log("created " + email, password, passwordConfirm);
-        // ...
+        writeUserData(user?.uid, email, password);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log("creation fail " + email, password, passwordConfirm);
-        // ..
       });
   }
 
@@ -111,7 +150,14 @@ export const AuthProvider = ({ children }: Props) => {
 
   return (
     <AuthContext.Provider
-      value={{ currentUser, isAuth, register, login, logout }}
+      value={{
+        currentUser,
+        isAuth,
+        register,
+        login,
+        logout,
+        didUserWatchedAnime,
+      }}
     >
       {children}
     </AuthContext.Provider>
@@ -122,7 +168,7 @@ export const useAuthContext = () => {
   const context = useContext(AuthContext);
 
   if (context === undefined) {
-    throw new Error("useAuthContext must be used inside AuthContext");
+    throw new Error("  must be used inside AuthContext");
   }
 
   return context;

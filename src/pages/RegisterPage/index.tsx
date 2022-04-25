@@ -1,24 +1,35 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useAuthContext } from "../../contexts/AuthContext";
 
+enum FormValues {
+  email = "email",
+  password = "password",
+  passwordRepeat = "passwordRepeat",
+}
+
 export default function RegisterPage() {
   const { register, isAuth } = useAuthContext();
 
-  const emailRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const passwordRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const passwordConfirmRef =
-    useRef() as React.MutableRefObject<HTMLInputElement>;
+  const [formData, setFormData] = useState({
+    [FormValues.email]: "",
+    [FormValues.password]: "",
+    [FormValues.passwordRepeat]: "",
+  });
 
   function hadleCreateAccount(e: { preventDefault: () => void }) {
     e.preventDefault();
-    register(
-      emailRef?.current.value,
-      passwordRef?.current.value,
-      passwordConfirmRef?.current?.value
-    );
+    const { email, password, passwordRepeat } = formData;
+    register(email, password, passwordRepeat);
   }
+
+  const handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   //redirect
   const shouldRedirect = isAuth;
@@ -36,7 +47,8 @@ export default function RegisterPage() {
         <label>
           <input
             type="email"
-            ref={emailRef}
+            name={FormValues.email}
+            onChange={handleOnInputChange}
             required
             placeholder="Email"
             autoFocus
@@ -45,7 +57,8 @@ export default function RegisterPage() {
         <label>
           <input
             type="password"
-            ref={passwordRef}
+            name={FormValues.password}
+            onChange={handleOnInputChange}
             required
             placeholder="Password"
           />
@@ -53,7 +66,8 @@ export default function RegisterPage() {
         <label>
           <input
             type="password"
-            ref={passwordConfirmRef}
+            name={FormValues.passwordRepeat}
+            onChange={handleOnInputChange}
             required
             placeholder="Repeat Password"
           />

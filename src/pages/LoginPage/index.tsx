@@ -1,17 +1,34 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useAuthContext } from "../../contexts/AuthContext";
 
+enum FormValues {
+  email = "email",
+  password = "password",
+}
+
 export default function LoginPage() {
   const { login, isAuth } = useAuthContext();
+  const [formData, setFormData] = useState({
+    [FormValues.email]: "",
+    [FormValues.password]: "",
+  });
 
-  const emailRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const passwordRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const handleOnInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData((prev) => ({
+        ...prev,
+        [e.target.name]: e.target.value,
+      }));
+    },
+    []
+  );
 
   function handleLogin(e: { preventDefault: () => void }) {
     e.preventDefault();
-    login(emailRef?.current?.value, passwordRef?.current?.value);
+    const { email, password } = formData;
+    login(email, password);
   }
 
   //redirect
@@ -31,7 +48,8 @@ export default function LoginPage() {
           <input
             className="login-page__input login-page__input--email"
             type="email"
-            ref={emailRef}
+            name={FormValues.email}
+            onChange={handleOnInputChange}
             required
             autoFocus
             placeholder="Email"
@@ -41,7 +59,8 @@ export default function LoginPage() {
           <input
             className="login-page__input login-page__input--password"
             type="password"
-            ref={passwordRef}
+            name={FormValues.password}
+            onChange={handleOnInputChange}
             required
             placeholder="Password"
           />

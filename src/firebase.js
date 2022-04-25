@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 
 // const firebaseConfig = initializeApp({
 //   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -11,9 +12,21 @@ import { getAuth } from "firebase/auth";
 //   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 // });
 
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDh1W1wGr4gK7boTE_cg2_z6FlAnlORdx0",
+//   authDomain: "anime-project-dev.firebaseapp.com",
+//   projectId: "anime-project-dev",
+//   storageBucket: "anime-project-dev.appspot.com",
+//   messagingSenderId: "41481850322",
+//   appId: "1:41481850322:web:05bba6709eb03883ab0c0b",
+//   measurementId: "G-F73CKCE1SP",
+// };
+
 const firebaseConfig = {
   apiKey: "AIzaSyDh1W1wGr4gK7boTE_cg2_z6FlAnlORdx0",
   authDomain: "anime-project-dev.firebaseapp.com",
+  databaseURL:
+    "https://anime-project-dev-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "anime-project-dev",
   storageBucket: "anime-project-dev.appspot.com",
   messagingSenderId: "41481850322",
@@ -22,6 +35,7 @@ const firebaseConfig = {
 };
 
 export const app = initializeApp(firebaseConfig);
+export const database = getDatabase(app);
 const analytics = getAnalytics(app);
 
 export const auth = getAuth(app);

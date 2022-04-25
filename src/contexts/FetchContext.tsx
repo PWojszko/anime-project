@@ -9,6 +9,7 @@ import React, {
 import { useLocation, useParams } from "react-router-dom";
 
 type AnimeByIdType = {
+  mal_id?: number;
   images?: { webp: { image_url: string } };
   trailer?: { embed_url: string };
   title_japanese?: string;
@@ -53,7 +54,6 @@ const FetchContextProvider = ({ children }: Props) => {
   const [animeById, setAnimeById] = useState<AnimeByIdType | null>(null);
   const [animeCharacters, setAnimeCharacters] = useState<Data[] | null>(null);
 
-  let { id } = useParams();
   let location = useLocation();
   let locationNumber = Number(
     location.pathname.slice(Number("/anime/".length))

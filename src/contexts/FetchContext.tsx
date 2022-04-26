@@ -39,7 +39,7 @@ type FetchValue = {
   getCurrentAnime?: () => void;
   getAnimeById?: (location: number) => void;
   getAnimeCharacters?: (location: number) => void;
-  setAnimeById: any;
+  setAnimeById?: any;
 };
 
 export const FetchContext = createContext<FetchValue | undefined>(undefined);
@@ -54,39 +54,81 @@ const FetchContextProvider = ({ children }: Props) => {
   const [animeById, setAnimeById] = useState<AnimeByIdType | null>(null);
   const [animeCharacters, setAnimeCharacters] = useState<Data[] | null>(null);
 
+  const [loadingTopAnime, setLoadingTopAnime] = useState(true);
+  const [loadingCurrentAnime, setLoadingCurrentAnime] = useState(true);
+  const [loadingAnimeById, setLoadingAnimeById] = useState(true);
+  const [loadingAnimeCharacters, setLoadingAnimeCharacters] = useState(true);
+
   let location = useLocation();
   let locationNumber = Number(
     location.pathname.slice(Number("/anime/".length))
   );
 
   useEffect(() => {
-    axios.get("https://api.jikan.moe/v4/seasons/now").then((response) => {
-      setCurrentAnime(response.data.data);
-    });
-    axios.get("https://api.jikan.moe/v4/top/anime").then((response) => {
-      setTopAnime(response.data.data);
-    });
-  }, []);
+    const fetchData = async () => {
+      setLoadingCurrentAnime(true);
+      try {
+        const { data: response } = await axios.get(
+          "https://api.jikan.moe/v4/seasons/now"
+        );
+        setCurrentAnime(response.data);
+      } catch (error) {
+        console.error("CurrentAnime error");
+      }
+      setLoadingCurrentAnime(false);
+    };
 
-  function getAnimeById(location: number) {
-    axios.get(`https://api.jikan.moe/v4/anime/${location}`).then((response) => {
-      setAnimeById(response.data.data);
-    });
-  }
-  if (locationNumber) {
-    getAnimeById?.(Number(locationNumber));
-  }
+    if (location.pathname === "/") fetchData();
+  }, [location.pathname]);
 
-  function getAnimeCharacters(location: number) {
-    axios
-      .get(`https://api.jikan.moe/v4/anime/${location}/characters`)
-      .then((response) => {
-        setAnimeCharacters(response.data.data);
-      });
-  }
-  if (locationNumber) {
-    getAnimeCharacters?.(Number(locationNumber));
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoadingTopAnime(true);
+      try {
+        const { data: response } = await axios.get(
+          "https://api.jikan.moe/v4/top/anime"
+        );
+        setTopAnime(response.data);
+      } catch (error) {
+        console.error("TopAnime error");
+      }
+      setLoadingTopAnime(false);
+    };
+    if (location.pathname === "/") fetchData();
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoadingAnimeById(true);
+      try {
+        const { data: response } = await axios.get(
+          `https://api.jikan.moe/v4/anime/${locationNumber}`
+        );
+        setAnimeById(response.data);
+      } catch (error) {
+        console.error("AnimeById error");
+      }
+      setLoadingAnimeById(false);
+    };
+    if (locationNumber > 0) fetchData();
+  }, [locationNumber]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoadingAnimeCharacters(true);
+      try {
+        const { data: response } = await axios.get(
+          `https://api.jikan.moe/v4/anime/${locationNumber}/characters`
+        );
+        setAnimeCharacters(response.data);
+      } catch (error) {
+        console.error("AnimeCharacters error");
+      }
+      setLoadingAnimeCharacters(false);
+    };
+
+    if (locationNumber > 0) fetchData();
+  }, [locationNumber]);
 
   return (
     <FetchContext.Provider
@@ -95,8 +137,6 @@ const FetchContextProvider = ({ children }: Props) => {
         animeCharacters,
         topAnime,
         currentAnime,
-        getAnimeById,
-        getAnimeCharacters,
         setAnimeById,
       }}
     >

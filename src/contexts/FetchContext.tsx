@@ -40,6 +40,10 @@ type FetchValue = {
   getAnimeById?: (location: number) => void;
   getAnimeCharacters?: (location: number) => void;
   setAnimeById?: any;
+  loadingTopAnime: boolean;
+  loadingCurrentAnime: boolean;
+  loadingAnimeById: boolean;
+  loadingAnimeCharacters: boolean;
 };
 
 export const FetchContext = createContext<FetchValue | undefined>(undefined);
@@ -65,70 +69,63 @@ const FetchContextProvider = ({ children }: Props) => {
   );
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoadingCurrentAnime(true);
-      try {
-        const { data: response } = await axios.get(
-          "https://api.jikan.moe/v4/seasons/now"
-        );
-        setCurrentAnime(response.data);
-      } catch (error) {
-        console.error("CurrentAnime error");
-      }
-      setLoadingCurrentAnime(false);
-    };
-
-    if (location.pathname === "/") fetchData();
+    if (location.pathname === "/") fetchCurrentAnimeData();
+    if (location.pathname === "/") fetchTopAnimeData();
+    if (locationNumber > 0) fetchAnimeByIdData();
+    if (locationNumber > 0) fetchAnimeCharactersData();
   }, [location.pathname]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoadingTopAnime(true);
-      try {
-        const { data: response } = await axios.get(
-          "https://api.jikan.moe/v4/top/anime"
-        );
-        setTopAnime(response.data);
-      } catch (error) {
-        console.error("TopAnime error");
-      }
-      setLoadingTopAnime(false);
-    };
-    if (location.pathname === "/") fetchData();
-  }, [location.pathname]);
+  const fetchCurrentAnimeData = async () => {
+    setLoadingCurrentAnime(true);
+    try {
+      const { data: response } = await axios.get(
+        "https://api.jikan.moe/v4/seasons/now"
+      );
+      setCurrentAnime(response.data);
+    } catch (error) {
+      console.error("CurrentAnime error");
+    }
+    setLoadingCurrentAnime(false);
+  };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoadingAnimeById(true);
-      try {
-        const { data: response } = await axios.get(
-          `https://api.jikan.moe/v4/anime/${locationNumber}`
-        );
-        setAnimeById(response.data);
-      } catch (error) {
-        console.error("AnimeById error");
-      }
-      setLoadingAnimeById(false);
-    };
-    if (locationNumber > 0) fetchData();
-  }, [locationNumber]);
+  const fetchTopAnimeData = async () => {
+    setLoadingTopAnime(true);
+    try {
+      const { data: response } = await axios.get(
+        "https://api.jikan.moe/v4/top/anime"
+      );
+      setTopAnime(response.data);
+    } catch (error) {
+      console.error("TopAnime error");
+    }
+    setLoadingTopAnime(false);
+  };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoadingAnimeCharacters(true);
-      try {
-        const { data: response } = await axios.get(
-          `https://api.jikan.moe/v4/anime/${locationNumber}/characters`
-        );
-        setAnimeCharacters(response.data);
-      } catch (error) {
-        console.error("AnimeCharacters error");
-      }
-      setLoadingAnimeCharacters(false);
-    };
+  const fetchAnimeByIdData = async () => {
+    setLoadingAnimeById(true);
+    try {
+      const { data: response } = await axios.get(
+        `https://api.jikan.moe/v4/anime/${locationNumber}`
+      );
+      setAnimeById(response.data);
+    } catch (error) {
+      console.error("AnimeById error");
+    }
+    setLoadingAnimeById(false);
+  };
 
-    if (locationNumber > 0) fetchData();
-  }, [locationNumber]);
+  const fetchAnimeCharactersData = async () => {
+    setLoadingAnimeCharacters(true);
+    try {
+      const { data: response } = await axios.get(
+        `https://api.jikan.moe/v4/anime/${locationNumber}/characters`
+      );
+      setAnimeCharacters(response.data);
+    } catch (error) {
+      console.error("AnimeCharacters error");
+    }
+    setLoadingAnimeCharacters(false);
+  };
 
   return (
     <FetchContext.Provider
@@ -138,6 +135,10 @@ const FetchContextProvider = ({ children }: Props) => {
         topAnime,
         currentAnime,
         setAnimeById,
+        loadingTopAnime,
+        loadingCurrentAnime,
+        loadingAnimeById,
+        loadingAnimeCharacters,
       }}
     >
       {children}

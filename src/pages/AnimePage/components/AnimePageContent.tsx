@@ -118,7 +118,9 @@ const AnimePageContent = () => {
         </div>
         {image}
       </div>
-      <button onClick={clickHandler}>Watched</button>
+      <button className="anime-page_button button" onClick={clickHandler}>
+        Watched
+      </button>
 
       <div className="anime-page__character-list" {...events} ref={ref}>
         {animeCharactersMap}

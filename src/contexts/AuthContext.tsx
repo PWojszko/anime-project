@@ -78,19 +78,12 @@ export const AuthProvider = ({ children }: Props) => {
     const user = auth?.currentUser?.uid;
 
     const userData = {
-      AnimeId: [123, 1234],
+      watched: true,
     };
 
     const updates: any = {};
-    updates["users/" + user + "/watched"] = userData;
-
-    const watchedAnimeRef = ref(db, "users/");
-    onValue(watchedAnimeRef, (snapshot) => {
-      const data = snapshot.val();
-      // updateWatchedAnimeRef(postElement, data);
-      setUserInfo(data);
-      console.log(userInfo);
-    });
+    updates["users/" + user + "/libary/" + AnimeId] = userData;
+    console.log(updates);
 
     return update(ref(db), updates);
   }

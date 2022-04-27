@@ -4,7 +4,7 @@ import { useDraggable } from "react-use-draggable-scroll";
 
 import { useFetchContext } from "../../../contexts/FetchContext";
 
-function TopAnime() {
+const TopAnime = () => {
   const { topAnime } = useFetchContext();
   const ref = useRef() as React.MutableRefObject<HTMLInputElement>;
   const { events } = useDraggable(ref, {
@@ -25,7 +25,7 @@ function TopAnime() {
   ));
 
   return (
-    <div className="carousel">
+    <section className="carousel">
       <div className="carousel__title-container">
         <h2 className="carousel__title">Top anime</h2>
         <div className="carousel__line"></div>
@@ -33,8 +33,8 @@ function TopAnime() {
       <div className="carousel__list" {...events} ref={ref}>
         {TopAnimeList}
       </div>
-    </div>
+    </section>
   );
-}
+};
 
 export default TopAnime;

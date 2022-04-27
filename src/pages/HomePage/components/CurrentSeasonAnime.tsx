@@ -4,7 +4,7 @@ import { useDraggable } from "react-use-draggable-scroll";
 
 import { useFetchContext } from "../../../contexts/FetchContext";
 
-function CurrentSeasonAnime() {
+const CurrentSeasonAnime = () => {
   const { currentAnime } = useFetchContext();
   const ref = useRef() as React.MutableRefObject<HTMLInputElement>;
   const { events } = useDraggable(ref, {
@@ -25,7 +25,7 @@ function CurrentSeasonAnime() {
   ));
 
   return (
-    <div className="carousel">
+    <section className="carousel">
       <div className="carousel__title-container">
         <h2 className="carousel__title">Current season</h2>
         <div className="carousel__line"></div>
@@ -33,8 +33,8 @@ function CurrentSeasonAnime() {
       <div className="carousel__list" {...events} ref={ref}>
         {currentAnimeList}
       </div>
-    </div>
+    </section>
   );
-}
+};
 
 export default CurrentSeasonAnime;

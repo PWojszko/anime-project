@@ -22,8 +22,9 @@ type AnimeByIdType = {
 };
 
 type Data = {
-  title?: string;
   mal_id?: number;
+  title?: string;
+  synopsis?: string;
   images?: {
     webp?: {
       image_url: string;
@@ -36,6 +37,7 @@ type FetchValue = {
   animeCharacters?: any | null | undefined; // need types
   topAnime?: Data[] | null | undefined;
   currentAnime?: Data[] | null | undefined;
+  upcomingAnime?: Data[] | null | undefined;
   getCurrentAnime?: () => void;
   getAnimeById?: (location: number) => void;
   getAnimeCharacters?: (location: number) => void;
@@ -55,6 +57,7 @@ type Props = {
 const FetchContextProvider = ({ children }: Props) => {
   const [topAnime, setTopAnime] = useState<Data[] | null>(null);
   const [currentAnime, setCurrentAnime] = useState<Data[] | null>(null);
+  const [upcomingAnime, setUpcomingAnime] = useState<Data[] | null>(null);
   const [animeById, setAnimeById] = useState<AnimeByIdType | null>(null);
   const [animeCharacters, setAnimeCharacters] = useState<Data[] | null>(null);
 
@@ -71,6 +74,7 @@ const FetchContextProvider = ({ children }: Props) => {
   useEffect(() => {
     if (location.pathname === "/") fetchCurrentAnimeData();
     if (location.pathname === "/") fetchTopAnimeData();
+    if (location.pathname === "/") fetchUpcomingAnimeData();
     if (locationNumber > 0) fetchAnimeByIdData();
     if (locationNumber > 0) fetchAnimeCharactersData();
   }, [location.pathname]);
@@ -99,6 +103,19 @@ const FetchContextProvider = ({ children }: Props) => {
       console.error("TopAnime error");
     }
     setLoadingTopAnime(false);
+  };
+
+  const fetchUpcomingAnimeData = async () => {
+    setLoadingCurrentAnime(true);
+    try {
+      const { data: response } = await axios.get(
+        "https://api.jikan.moe/v4/seasons/upcoming"
+      );
+      setUpcomingAnime(response.data);
+    } catch (error) {
+      console.error("CurrentAnime error");
+    }
+    setLoadingCurrentAnime(false);
   };
 
   const fetchAnimeByIdData = async () => {
@@ -134,6 +151,7 @@ const FetchContextProvider = ({ children }: Props) => {
         animeCharacters,
         topAnime,
         currentAnime,
+        upcomingAnime,
         setAnimeById,
         loadingTopAnime,
         loadingCurrentAnime,

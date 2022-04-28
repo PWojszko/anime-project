@@ -1,5 +1,8 @@
-body {
-  position: relative;
-  min-height: 100vh;
-  padding-bottom: 75px;
+html {
+  scroll-behavior: smooth;
+  body {
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 75px;
+  }
 }

@@ -74,7 +74,7 @@ const AnimePageContent = () => {
       )
     : null;
 
-  const animeCharactersMap = loadingAnimeCharacters
+  const animeCharactersMap = !loadingAnimeCharacters
     ? animeCharacters?.map((character: any, id: number) =>
         character?.role === "Main" ? (
           <div key={id} className="anime-page__character-container">

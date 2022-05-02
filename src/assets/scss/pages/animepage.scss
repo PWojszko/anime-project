@@ -2,7 +2,7 @@
   .anime-page__article {
     max-width: 1170px;
     margin: 0 auto;
-    padding: 25px 15px;
+    padding: 125px 15px;
 
     .anime-page__watermark {
       position: absolute;
@@ -44,6 +44,7 @@
       }
     }
 
+    // characters
     .anime-page__character-list {
       display: flex;
       margin-bottom: 50px;
@@ -62,6 +63,47 @@
           position: relative;
           border-left: 2px solid $color-1;
           margin: 20px 0;
+          transition: all 0.3s;
+
+          &::before {
+            content: "<";
+            position: absolute;
+            inset: 0 0 0 30px;
+            display: flex;
+            place-content: flex-start;
+            place-items: center;
+            opacity: 0;
+            transition: all 0.2s;
+            color: $color-1;
+            transform: scale(0);
+            font-size: 50px;
+          }
+
+          &::after {
+            content: ">";
+            position: absolute;
+            inset: 0 10px 0 0;
+            display: flex;
+            place-content: flex-end;
+            place-items: center;
+            opacity: 0;
+            transition: all 0.2s;
+            color: $color-1;
+            transform: scale(0);
+            font-size: 50px;
+          }
+
+          &:hover {
+            filter: brightness(0.8);
+            &::before {
+              opacity: 1;
+              transform: scale(1);
+            }
+            &::after {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
 
           .anime-page__character-text {
             .anime-page__title-container {
@@ -106,6 +148,7 @@
       }
     }
 
+    // parameters
     .anime-page__parameter-list {
       display: flex;
       justify-content: space-between;
@@ -127,6 +170,7 @@
       }
     }
 
+    // video
     .anime-page__video {
       position: relative;
       padding: 20px 0 0 20px;

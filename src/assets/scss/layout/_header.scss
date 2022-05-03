@@ -1,18 +1,10 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-
-  position: fixed;
-  top: 0;
-  width: 100%;
-  min-height: 50px;
-  padding: 15px 25px;
-  z-index: 1;
-
-  background-color: rgba($color-dark-1, 0.7);
-  backdrop-filter: blur(3px);
+  background-color: $color-dark-1;
+  transition: all 1s;
 
   .header__logo {
+    padding: $padding-1;
+
     font-size: 30px;
     font-weight: lighter;
 
@@ -27,16 +19,58 @@
     }
   }
 
+  .header__button {
+    position: sticky;
+    top: 10px;
+    width: 50px;
+    height: 50px;
+    float: right;
+    transition: all 0.3s;
+
+    cursor: pointer;
+    .header__button-line {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 2px;
+      background-color: $color-1;
+      transition: all 0.3s;
+    }
+    .header__button-line-1 {
+      transform: translate(0, -7px) rotate(45deg);
+    }
+    .header__button-line-2 {
+      transform: translate(0, 7px) rotate(-45deg);
+    }
+    .header__button-line-3 {
+      transform: translate(-7px, -7px) rotate(45deg);
+    }
+    .header__button-line-4 {
+      transform: translate(-7px, 7px) rotate(-45deg);
+    }
+
+    &:hover {
+      transform: translate(5px, 0);
+      .header__button-line-1 {
+        transform: translate(0, -7px) rotate(45deg);
+      }
+      .header__button-line-2 {
+        transform: translate(0, 7px) rotate(-45deg);
+      }
+      .header__button-line-3 {
+        transform: translate(-5px, 0) rotate(0);
+      }
+      .header__button-line-4 {
+        transform: translate(-5px, 0) rotate(0);
+      }
+    }
+  }
+
   .search {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-
+    transition: all 0.5s;
     .search__form {
-      height: 100%;
-
       .search__input {
-        height: 100%;
         border-radius: $radius;
         background-color: $color-dark-2;
         border: none;
@@ -86,14 +120,37 @@
   }
 
   .header__nav {
-    display: flex;
-    place-items: center;
-    column-gap: 20px;
+    position: sticky;
+    top: $padding-1;
+    margin: $padding-1;
+    transition: all 0.5s;
 
     .button {
       display: flex;
       justify-content: center;
       flex-direction: row;
+    }
+  }
+
+  &.header--inactive {
+    width: 150px;
+
+    .search {
+      opacity: 0;
+    }
+    .header__nav {
+      opacity: 0;
+    }
+  }
+
+  &.header--active {
+    width: 350px;
+
+    .search {
+      opacity: 1;
+    }
+    .header__nav {
+      opacity: 1;
     }
   }
 }

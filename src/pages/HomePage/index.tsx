@@ -1,12 +1,12 @@
 import CurrentSeasonAnime from "./components/CurrentSeasonAnime";
 import TopAnime from "./components/TopAnime";
-import HeroPage from "./components/HeroPage";
+import Hero from "./components/Hero";
 
 export function HomePage() {
   return (
     <div className="home-page">
       <main className="home-page__main">
-        <HeroPage />
+        <Hero />
         <CurrentSeasonAnime />
         <TopAnime />
       </main>

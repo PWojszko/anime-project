@@ -15,7 +15,7 @@ import UserPanelPage from "../pages/UserPanelPage";
 function App() {
   const { isAuth } = useAuthContext();
   return (
-    <>
+    <div className="body">
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -25,7 +25,7 @@ function App() {
         <Route path="/userpanel" element={<UserPanelPage />} />
       </Routes>
       <Footer />
-    </>
+    </div>
   );
 }
 

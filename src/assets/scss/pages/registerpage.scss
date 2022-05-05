@@ -1,5 +1,96 @@
 .register-page {
-  max-width: 1170px;
-  margin: 0 auto;
+  display: flex;
+  place-items: center;
+  width: 100%;
   padding: 25px 15px;
+
+  .register-page__title-container {
+    height: 100%;
+    .register-page__title {
+      writing-mode: vertical-rl;
+      font-size: 100px;
+      color: $watermark-color-1;
+    }
+  }
+
+  .register-page__form-container {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    .register-page__form {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      row-gap: $padding-1;
+      border-right: 2px solid $color-2;
+      padding: 0 30px 75px 0;
+
+      .register-page__label {
+        .register-page__input {
+          background-color: $color-dark-1;
+          border: none;
+          height: 40px;
+          padding: $padding-1;
+          color: $color-light-1;
+          border-radius: $radius-1;
+        }
+      }
+
+      .register-page__submit {
+        position: relative;
+        height: 50px;
+        overflow: hidden;
+        border-radius: $radius-1;
+
+        &::after {
+          transition: all 0.5s;
+          content: "登録";
+          white-space: nowrap;
+          position: absolute;
+          font-size: 66px;
+          bottom: -30px;
+          transform: rotate(-19deg);
+          margin-left: -25px;
+          color: rgba(0, 0, 0, 0.15);
+          opacity: 0;
+          right: 0;
+        }
+
+        &:hover::after {
+          opacity: 1;
+        }
+      }
+    }
+
+    .register-page__redirect {
+      position: relative;
+      overflow: hidden;
+
+      .register-page__redirect-container {
+        .register-page__text {
+          position: absolute;
+          bottom: 15px;
+          left: 30px;
+          width: 100%;
+          transform: translate(0, -50%);
+        }
+        .register-page__button {
+          position: absolute;
+          bottom: 15px;
+          left: 0;
+          width: 100%;
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+          transform: translate(-100%, 0);
+        }
+
+        &:hover {
+          .register-page__button {
+            transform: translate(0, 0);
+          }
+        }
+      }
+    }
+  }
 }

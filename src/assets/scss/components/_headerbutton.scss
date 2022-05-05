@@ -1,0 +1,90 @@
+.header {
+  .header__button {
+    position: sticky;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    float: right;
+    transition: all 0.3s;
+    background-color: $color-dark-2;
+    border-radius: $radius-1 0 0 $radius-1;
+    transform: translate(0, -50%);
+
+    cursor: pointer;
+    .header__button-line {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 2px;
+      background-color: $color-1;
+      transition: all 0.3s;
+    }
+
+    .header__button-line-1 {
+      transform: translate(0, -7px) rotate(45deg);
+    }
+    .header__button-line-2 {
+      transform: translate(0, 7px) rotate(-45deg);
+    }
+    .header__button-line-3 {
+      width: 15px;
+      transform: translate(-7px, -5px) rotate(45deg);
+    }
+    .header__button-line-4 {
+      width: 15px;
+      transform: translate(-7px, 5px) rotate(-45deg);
+    }
+
+    &:hover {
+      .header__button-line-1 {
+        transform: translate(4px, -7px) rotate(45deg);
+      }
+      .header__button-line-2 {
+        transform: translate(4px, 7px) rotate(-45deg);
+      }
+      .header__button-line-3 {
+        transform: translate(-3px, 0) rotate(0);
+      }
+      .header__button-line-4 {
+        transform: translate(-3px, 0) rotate(0);
+      }
+    }
+  }
+
+  &.header--active {
+    .header__button {
+      .header__button-line-1 {
+        transform: translate(-5px, 7px) rotate(45deg);
+      }
+      .header__button-line-2 {
+        transform: translate(-5px, -7px) rotate(-45deg);
+      }
+      .header__button-line-3 {
+        width: 15px;
+        transform: translate(5px, 5px) rotate(45deg);
+      }
+      .header__button-line-4 {
+        width: 15px;
+        transform: translate(5px, -5px) rotate(-45deg);
+      }
+
+      &:hover {
+        .header__button-line-1 {
+          transform: translate(-9px, 7px) rotate(45deg);
+        }
+        .header__button-line-2 {
+          transform: translate(-9px, -7px) rotate(-45deg);
+        }
+        .header__button-line-3 {
+          transform: translate(1px, 0) rotate(0);
+        }
+        .header__button-line-4 {
+          transform: translate(1px, 0) rotate(0);
+        }
+      }
+    }
+  }
+  &.header--inactive {
+  }
+}

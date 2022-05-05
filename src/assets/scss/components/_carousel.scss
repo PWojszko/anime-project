@@ -28,7 +28,7 @@
 
     .carousel__item {
       position: relative;
-      border-radius: $radius;
+      border-radius: $radius-1;
       transition: all 0.3s;
       transform: scale(0.9);
       overflow: hidden;

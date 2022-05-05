@@ -55,8 +55,8 @@ const Navigation = () => {
 
   return (
     <nav className="header__nav">
-      {navButtons}
       <SearchBar />
+      {navButtons}
     </nav>
   );
 };

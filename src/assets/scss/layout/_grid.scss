@@ -1,17 +1,20 @@
 .body {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  grid-template-rows: auto;
+  grid-template-rows: 1fr auto;
   grid-template-areas:
     "header content"
     "footer footer";
+  min-height: 100vh;
 }
 
 .header {
   grid-area: header;
 }
 
-.home-page {
+.home-page,
+.login-page,
+.register-page {
   grid-area: content;
 }
 

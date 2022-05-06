@@ -41,6 +41,7 @@ type FetchValue = {
   getCurrentAnime?: () => void;
   getAnimeById?: (location: number) => void;
   getAnimeCharacters?: (location: number) => void;
+  fetchAnimeByIdData?: (id: number) => void;
   setAnimeById?: any;
   loadingTopAnime: boolean;
   loadingCurrentAnime: boolean;
@@ -118,11 +119,11 @@ const FetchContextProvider = ({ children }: Props) => {
     setLoadingCurrentAnime(false);
   };
 
-  const fetchAnimeByIdData = async () => {
+  const fetchAnimeByIdData = async (id: number = locationNumber) => {
     setLoadingAnimeById(true);
     try {
       const { data: response } = await axios.get(
-        `https://api.jikan.moe/v4/anime/${locationNumber}`
+        `https://api.jikan.moe/v4/anime/${id}`
       );
       setAnimeById(response.data);
     } catch (error) {
@@ -157,6 +158,7 @@ const FetchContextProvider = ({ children }: Props) => {
         loadingCurrentAnime,
         loadingAnimeById,
         loadingAnimeCharacters,
+        fetchAnimeByIdData,
       }}
     >
       {children}

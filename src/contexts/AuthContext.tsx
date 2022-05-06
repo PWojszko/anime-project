@@ -78,6 +78,7 @@ export const AuthProvider = ({ children }: Props) => {
     const user = auth?.currentUser?.uid;
 
     const userData = {
+      mal_id: AnimeId,
       watched: true,
     };
 

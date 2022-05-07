@@ -1,5 +1,62 @@
 .userpanel-page {
-  max-width: 1170px;
-  margin: 0 auto;
+  display: flex;
+  width: 100%;
   padding: 25px 15px;
+
+  .userpanel-page__title-container {
+    height: 100%;
+
+    .userpanel-page__title {
+      writing-mode: vertical-rl;
+      font-size: 100px;
+      color: $watermark-color-1;
+    }
+  }
+
+  .userpanel-page__container {
+    .userpanel-page__subtitle {
+      position: absolute;
+      right: $padding-1;
+      top: $padding-1;
+      background-color: $color-2;
+      padding: $padding-1;
+      border-radius: $radius-1;
+      opacity: 1;
+      transition: all 0.3s;
+    }
+
+    .userpanel-page__list {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: auto;
+      grid-gap: 30px;
+      max-height: 450px;
+      overflow: hidden;
+      box-shadow: inset 0px -30px 20px -20px $color-dark-2;
+      transition: 0.3s all;
+
+      .userpanel-page__card {
+        position: relative;
+        display: grid;
+        grid-template-columns: auto 1fr 1fr;
+        gap: 20px;
+        align-items: center;
+        background-color: $color-dark-3;
+
+        z-index: -1;
+        .userpanel-page__image {
+          height: 100px;
+          padding: 15px;
+        }
+        .userpanel-page__title {
+        }
+      }
+    }
+
+    .userpanel-page__seemore {
+      width: 100%;
+      border-radius: 0 0 $radius-1 $radius-1;
+    }
+  }
 }

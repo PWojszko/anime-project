@@ -39,12 +39,14 @@ export const WatchedAnime = ({ mal_id }: any) => {
   }, []);
 
   return (
-    <div>
-      {watchedAnime?.title}
+    <div className="userpanel-page__card">
       <img
+        className="userpanel-page__image"
         src={watchedAnime?.images?.webp.image_url}
         alt={watchedAnime?.title}
       />
+      <p className="userpanel-page__title">{watchedAnime?.title}</p>
+      <p>8/10</p>
     </div>
   );
 };

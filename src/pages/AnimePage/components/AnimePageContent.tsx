@@ -108,6 +108,24 @@ const AnimePageContent = () => {
       )
     : null;
 
+  const buttons = (
+    <div className="anime-page_buttons">
+      <div className="anime-page_buttons-container">
+        <button className="anime-page_button anime-page_button-watched button">
+          Watched
+        </button>
+        <div className="anime-page_button anime-page_button-rate button">
+          <span className="anime-page_button-text">Rate</span>
+          <button className="anime-page_button-score button">1</button>
+          <button className="anime-page_button-score button">2</button>
+          <button className="anime-page_button-score button">3</button>
+          <button className="anime-page_button-score button">4</button>
+          <button className="anime-page_button-score button">5</button>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <article className="anime-page__article">
       <p className="anime-page__watermark">{watermark}</p>
@@ -116,11 +134,11 @@ const AnimePageContent = () => {
           <h1 className="anime-page__title">{animeById?.title}</h1>
           <p className="anime-page__text">{animeById?.synopsis}</p>
         </div>
-        {image}
+        <div className="anime-page__container">
+          {buttons}
+          {image}
+        </div>
       </div>
-      <button className="anime-page_button button" onClick={clickHandler}>
-        Watched
-      </button>
 
       <div className="anime-page__character-list" {...events} ref={ref}>
         {animeCharactersMap}

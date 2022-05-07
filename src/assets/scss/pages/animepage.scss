@@ -22,8 +22,7 @@
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      margin-bottom: 25px;
-      column-gap: 50px;
+      gap: 125px;
       margin-bottom: 50px;
 
       .anime-page__content-part {
@@ -33,13 +32,60 @@
         }
       }
 
-      .anime-page__image-container {
-        position: relative;
-        border: 2px solid $color-1;
-        .anime-page__image {
+      .anime-page__container {
+        display: flex;
+        .anime-page__image-container {
           position: relative;
-          padding: 10px;
-          margin: 0 0 -20px -20px;
+          border: 2px solid $color-3;
+
+          .anime-page__image {
+            position: relative;
+            padding: 10px;
+            margin: 0 0 -20px -20px;
+          }
+        }
+
+        .anime-page_buttons {
+          position: relative;
+          .anime-page_buttons-container {
+            position: absolute;
+            right: 0;
+            overflow: hidden;
+            .anime-page_button {
+              margin-bottom: $padding-1;
+              float: right;
+              border-radius: 0;
+              min-height: 50px;
+              font-size: 1.6rem;
+              border-top-left-radius: $radius-1;
+              border-bottom-left-radius: $radius-1;
+
+              &.anime-page_button-rate {
+                display: flex;
+                flex-direction: row;
+                place-items: center;
+                column-gap: 10px;
+                cursor: auto;
+                transform: translate(calc(100% - 80px), 0);
+
+                &:hover {
+                  transform: translate(0, 0);
+                }
+
+                .anime-page_button-text {
+                  padding-right: 15px;
+                }
+
+                .anime-page_button-score {
+                  background-color: $color-dark-2;
+                }
+
+                .anime-page_button-score:hover {
+                  background-color: $color-3;
+                }
+              }
+            }
+          }
         }
       }
     }

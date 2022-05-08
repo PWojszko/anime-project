@@ -23,6 +23,10 @@ import { WatchedAnime } from "./components/WatchedAnime";
 
 export default function UserPanelPage() {
   const { register, isAuth } = useAuthContext();
+  const [watchedAnime, setWatchedAnime] = useState({});
+  const [isActive, setIsActive] = useState(false);
+
+  const handleClick = () => setIsActive((prev) => !prev);
 
   //redirect
   const shouldRedirect = !isAuth;
@@ -44,10 +48,28 @@ export default function UserPanelPage() {
     });
   }, []);
 
-  const [watchedAnime, setWatchedAnime] = useState({});
   const watchedAnimeMap = Object.values(watchedAnime)?.map((anime: any) => {
-    return <WatchedAnime mal_id={anime?.mal_id} />;
+    return <WatchedAnime key={anime?.mal_id} mal_id={anime?.mal_id} />;
   });
+
+  const watchedAnimeMapContainer = (
+    <div
+      className={
+        isActive
+          ? "userpanel-page__list userpanel-page__list--active"
+          : "userpanel-page__list userpanel-page__list--inactive"
+      }
+    >
+      {watchedAnimeMap}
+    </div>
+  );
+
+  const button =
+    watchedAnimeMapContainer.props.children.length >= 4 ? (
+      <button onClick={handleClick} className="button userpanel-page__seemore">
+        {isActive ? "See more" : "See less"}
+      </button>
+    ) : null;
 
   return (
     <div className="userpanel-page">
@@ -56,10 +78,8 @@ export default function UserPanelPage() {
       </div>
       <div className="userpanel-page__container">
         <h2 className="userpanel-page__subtitle">Watched</h2>
-        <div className="userpanel-page__list">{watchedAnimeMap}</div>
-        <button className="button userpanel-page__seemore userpanel-page__seemore--inactive">
-          See more
-        </button>
+        {watchedAnimeMapContainer}
+        {button}
       </div>
     </div>
   );

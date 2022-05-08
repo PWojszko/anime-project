@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-
 import { useDraggable } from "react-use-draggable-scroll";
-import { useAuthContext } from "../../../contexts/AuthContext";
 
+import { useAuthContext } from "../../../contexts/AuthContext";
 import { useFetchContext } from "../../../contexts/FetchContext";
+import { Rotator } from "../../../components/Rotator";
 
 const AnimePageContent = () => {
   const {
@@ -111,7 +111,10 @@ const AnimePageContent = () => {
   const buttons = (
     <div className="anime-page_buttons">
       <div className="anime-page_buttons-container">
-        <button className="anime-page_button anime-page_button-watched button">
+        <button
+          onClick={clickHandler}
+          className="anime-page_button anime-page_button-watched button"
+        >
           Watched
         </button>
         <div className="anime-page_button anime-page_button-rate button">
@@ -141,7 +144,7 @@ const AnimePageContent = () => {
       </div>
 
       <div className="anime-page__character-list" {...events} ref={ref}>
-        {animeCharactersMap}
+        {Rotator(animeCharactersMap)}
       </div>
       <div className="anime-page__parameter-list">{parametersListMap}</div>
       <div className="anime-page__video">{youtube}</div>

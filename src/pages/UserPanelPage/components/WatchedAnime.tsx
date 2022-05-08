@@ -46,7 +46,9 @@ export const WatchedAnime = ({ mal_id }: any) => {
         alt={watchedAnime?.title}
       />
       <p className="userpanel-page__title">{watchedAnime?.title}</p>
-      <p>8/10</p>
+      <p>
+        Rate: <strong>8/10</strong>
+      </p>
     </div>
   );
 };

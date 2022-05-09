@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import FetchContextProvider from "./contexts/FetchContext";
 import AuthContextProvider from "./contexts/AuthContext";
+import RWDContextProvider from "./contexts/RWDContext";
 
 import App from "./layouts/App";
 import "./assets/scss/main.scss";
@@ -17,7 +18,9 @@ root.render(
     <BrowserRouter>
       <FetchContextProvider>
         <AuthContextProvider>
-          <App />
+          <RWDContextProvider>
+            <App />
+          </RWDContextProvider>
         </AuthContextProvider>
       </FetchContextProvider>
     </BrowserRouter>

@@ -20,14 +20,16 @@
   }
 
   .rotator__list {
-    display: flex;
-    flex-wrap: nowrap;
-    transition: all 0.3s;
     width: 100%;
+    white-space: nowrap;
+    transition: all 0.3s;
 
     > div {
+      display: inline-block;
+      width: 25%;
       transition: 0.3s all;
       overflow: hidden;
+      padding: 0 15px;
     }
   }
 }

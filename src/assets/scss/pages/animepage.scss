@@ -89,7 +89,6 @@
     }
 
     // characters
-    /*
     .anime-page__character-list {
       display: flex;
       margin-bottom: 50px;
@@ -98,12 +97,6 @@
       margin: 0 -20px;
 
       .anime-page__character-container {
-        display: flex;
-        flex: 1 0 25%;
-        justify-content: center;
-        padding: 0 15px;
-        max-width: calc(1200px / 4);
-
         .anime-page__character-item {
           position: relative;
           border-left: 2px solid $color-1;
@@ -192,7 +185,6 @@
         }
       }
     }
-    */
 
     // parameters
     .anime-page__parameter-list {

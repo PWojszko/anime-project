@@ -1,22 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 
-export function Rotator(items: JSX.Element, itemsOnScreen: number) {
+import { useRWDContext } from "../contexts/RWDContext";
+
+export function Rotator(
+  items: JSX.Element,
+  itemsOnScreen: number,
+  itemsOnScreenSm: number,
+  itemsOnScreenMd: number,
+  itemsOnScreenLg: number
+) {
+  const { sm, md, lg } = useRWDContext();
+
   const [transformValue, setTransformValue] = useState(0);
   const [elementsQty, setElementsQty] = useState(0);
-  const [elementsOnScreen, setElementsOnScreen] = useState(itemsOnScreen);
+  const [elementsOnScreen, setElementsOnScreen] = useState(itemsOnScreenSm);
 
   const itemList = document.querySelectorAll<HTMLElement>(
     ".rotator__list > div"
   );
 
   useEffect(() => {
+    const itemList = document.querySelectorAll<HTMLElement>(
+      ".rotator__list > div"
+    );
+    setElementsQty(itemList.length);
+
+    if (lg.matches) {
+      setElementsOnScreen(itemsOnScreenLg);
+    } else if (md.matches) {
+      setElementsOnScreen(itemsOnScreenMd);
+    } else if (sm.matches) {
+      setElementsOnScreen(itemsOnScreenSm);
+    } else {
+      setElementsOnScreen(itemsOnScreen);
+    }
+  }, [itemList]);
+
+  useEffect(() => {
     itemList.forEach((element) => {
       element.style.transform = `translate(${transformValue}%, 0)`;
+      element.style.width = `${100 / elementsOnScreen}%`;
     });
-
-    setElementsOnScreen(4);
-    setElementsQty(itemList.length);
-  }, [itemList, transformValue]);
+  }, [transformValue, itemList, elementsOnScreen]);
 
   const handleClick = (side: string) => {
     const maxToRight = elementsQty - elementsOnScreen;
@@ -32,6 +57,7 @@ export function Rotator(items: JSX.Element, itemsOnScreen: number) {
   };
 
   const button = (direction: string) => {
+    if (elementsQty < elementsOnScreen) return;
     return (
       <button
         className={`rotator__button rotator__button-to-${direction} button`}
@@ -44,9 +70,9 @@ export function Rotator(items: JSX.Element, itemsOnScreen: number) {
 
   return (
     <div className="rotator">
-      {elementsQty > elementsOnScreen ? button("left") : null}
+      {button("left")}
       <div className="rotator__list">{items}</div>
-      {elementsQty > elementsOnScreen ? button("right") : null}
+      {button("right")}
     </div>
   );
 }

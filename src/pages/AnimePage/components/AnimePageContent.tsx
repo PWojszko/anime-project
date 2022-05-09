@@ -144,7 +144,7 @@ const AnimePageContent = () => {
       </div>
 
       <div className="anime-page__character-list" {...events} ref={ref}>
-        {Rotator(animeCharactersMap, 4)}
+        {Rotator(animeCharactersMap, 1, 1, 2, 4)}
       </div>
       <div className="anime-page__parameter-list">{parametersListMap}</div>
       <div className="anime-page__video">{youtube}</div>

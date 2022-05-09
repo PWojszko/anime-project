@@ -47,7 +47,10 @@ export function Rotator(
     const maxToRight = elementsQty - elementsOnScreen;
 
     const toLeftCondition = side === "left" && transformValue < 0;
-    const toRightCondition = side === "right" && transformValue > -maxToRight;
+    const toRightCondition =
+      side === "right" && transformValue > -maxToRight * 100;
+
+    //To do - swipe right block on RWD
 
     if (toLeftCondition) {
       setTransformValue((prev) => prev + 100);

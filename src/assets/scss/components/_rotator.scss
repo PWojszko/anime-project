@@ -17,14 +17,22 @@
     &.rotator__button-to-right {
       right: 0;
     }
+
+    &.rotator__button--active {
+    }
+    &.rotator__button--inactive {
+      opacity: 0;
+      pointer-events: none;
+    }
   }
 
   .rotator__list {
     width: 100%;
     white-space: nowrap;
     transition: all 0.3s;
+    cursor: grabbing;
 
-    > div {
+    .rotator__item {
       display: inline-block;
       width: 25%;
       transition: 0.3s all;

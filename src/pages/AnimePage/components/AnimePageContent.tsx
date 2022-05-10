@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useDraggable } from "react-use-draggable-scroll";
 
 import { useAuthContext } from "../../../contexts/AuthContext";
 import { useFetchContext } from "../../../contexts/FetchContext";
@@ -14,10 +13,6 @@ const AnimePageContent = () => {
     loadingAnimeCharacters,
   } = useFetchContext();
   const { didUserWatchedAnime } = useAuthContext();
-  const ref = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const { events } = useDraggable(ref, {
-    applyRubberBandEffect: true,
-  });
   const [isWatched, setIsWatched] = useState(false);
 
   const clickHandler = () => {
@@ -77,7 +72,10 @@ const AnimePageContent = () => {
   const animeCharactersMap = !loadingAnimeCharacters
     ? animeCharacters?.map((character: any, id: number) =>
         character?.role === "Main" ? (
-          <div key={id} className="anime-page__character-container">
+          <div
+            key={id}
+            className="anime-page__character-container rotator__item"
+          >
             <div
               className="anime-page__character-item"
               key={character?.character.mal_id}
@@ -143,8 +141,8 @@ const AnimePageContent = () => {
         </div>
       </div>
 
-      <div className="anime-page__character-list" {...events} ref={ref}>
-        {Rotator(animeCharactersMap, 1, 2, 2, 4)}
+      <div className="anime-page__character-list">
+        {Rotator(animeCharactersMap, 1, 2, 3, 4)}
       </div>
       <div className="anime-page__parameter-list">{parametersListMap}</div>
       <div className="anime-page__video">{youtube}</div>

@@ -34,7 +34,7 @@ type Data = {
 
 type FetchValue = {
   animeById?: AnimeByIdType | null | undefined;
-  animeCharacters?: any | null | undefined; // need types
+  animeCharacters?: any | null | undefined; // to do types
   topAnime?: Data[] | null | undefined;
   currentAnime?: Data[] | null | undefined;
   upcomingAnime?: Data[] | null | undefined;
@@ -42,7 +42,7 @@ type FetchValue = {
   getAnimeById?: (location: number) => void;
   getAnimeCharacters?: (location: number) => void;
   fetchAnimeByIdData?: (id: number) => void;
-  setAnimeById?: any;
+  setAnimeById?: any; // to do types
   loadingTopAnime: boolean;
   loadingCurrentAnime: boolean;
   loadingAnimeById: boolean;

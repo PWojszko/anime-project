@@ -1,9 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  useLayoutEffect,
-  useCallback,
-} from "react";
+import React, { useEffect, useState } from "react";
 
 import { useRWDContext } from "../contexts/RWDContext";
 
@@ -19,8 +14,11 @@ export function Rotator(
   const [scrollCounter, setScrollCounter] = useState(0);
   const [elementsQty, setElementsQty] = useState(0);
   const [elementsOnScreen, setElementsOnScreen] = useState(itemsOnScreenSm);
+  const [elementWidth, setElementWidth] = useState(0);
 
   const itemList = document.querySelectorAll<HTMLElement>(".rotator__item");
+  const itemListContainer =
+    document.querySelector<HTMLElement>(".rotator__list");
   const maxSwipeRight = elementsQty - elementsOnScreen;
 
   // RWD
@@ -56,9 +54,15 @@ export function Rotator(
   // Move mechanism
   useEffect(() => {
     itemList.forEach((element) => {
-      element.style.transform = `translate(${scrollCounter * 100}%, 0)`;
+      setElementWidth(element.offsetWidth);
       element.style.width = `${100 / elementsOnScreen}%`;
     });
+
+    if (itemListContainer) {
+      itemListContainer.style.transform = `translate(${
+        scrollCounter * elementWidth
+      }px, 0)`;
+    }
   }, [scrollCounter, itemList, elementsOnScreen]);
 
   const swipeMechanism = (side: string) => {

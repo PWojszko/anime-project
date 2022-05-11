@@ -121,7 +121,14 @@ export function Rotator(
         className={`rotator__button rotator__button--${activeClassName} rotator__button-to-${direction} button`}
         onClick={() => handleClick(direction)}
       >
-        {direction}
+        <div
+          className={`rotator__button-lines rotator-button-lines--${direction}`}
+        >
+          <div className="rotator__button-line rotator__button-line-1"></div>
+          <div className="rotator__button-line rotator__button-line-2"></div>
+          <div className="rotator__button-line rotator__button-line-3"></div>
+          <div className="rotator__button-line rotator__button-line-4"></div>
+        </div>
       </button>
     );
   };

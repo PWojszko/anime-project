@@ -16,14 +16,18 @@ export function Rotator(
   const [elementsOnScreen, setElementsOnScreen] = useState(itemsOnScreenSm);
   const [elementWidth, setElementWidth] = useState(0);
 
-  const itemList = document.querySelectorAll<HTMLElement>(".rotator__item");
+  const itemList = document.querySelectorAll<HTMLElement>(
+    ".rotator__list > div"
+  );
   const itemListContainer =
     document.querySelector<HTMLElement>(".rotator__list");
   const maxSwipeRight = elementsQty - elementsOnScreen;
 
   // RWD
   useEffect(() => {
-    const itemList = document.querySelectorAll<HTMLElement>(".rotator__item");
+    const itemList = document.querySelectorAll<HTMLElement>(
+      ".rotator__list > div"
+    );
     setElementsQty(itemList.length);
 
     if (lg.matches) {

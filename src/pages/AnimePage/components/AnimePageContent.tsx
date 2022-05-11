@@ -70,40 +70,37 @@ const AnimePageContent = () => {
     : null;
 
   const animeCharactersMap = !loadingAnimeCharacters
-    ? animeCharacters?.map((character: any, id: number) =>
-        character?.role === "Main" ? (
+    ? animeCharacters?.map((character: any, id: number) => (
+        <div key={id} className="anime-page__character-container rotator__item">
           <div
-            key={id}
-            className="anime-page__character-container rotator__item"
+            className="anime-page__character-item"
+            key={character?.character.mal_id}
           >
-            <div
-              className="anime-page__character-item"
-              key={character?.character.mal_id}
-            >
-              <div className="anime-page__character-text">
-                <div className="anime-page__title-container">
-                  <div className="anime-page__line"></div>
-                  <p className="anime-page__character-title">
-                    {character?.character.name}
-                  </p>
-                </div>
-                <img
-                  className="anime-page__character-image"
-                  src={character.character?.images.webp.image_url}
-                  alt={character.character?.name}
-                />
-                <div className="anime-page__subtitle-container">
-                  <div className="anime-page__line"></div>
+            <div className="anime-page__character-text">
+              <div className="anime-page__title-container">
+                <div className="anime-page__line"></div>
+                <p className="anime-page__character-title">
+                  {character?.character.name}
+                </p>
+              </div>
+              <img
+                className="anime-page__character-image"
+                src={character.character?.images.webp.image_url}
+                alt={character.character?.name}
+              />
+              <div className="anime-page__subtitle-container">
+                <div className="anime-page__line"></div>
+                {animeCharacters[0]?.voice_actors[id] ? (
                   <p className="anime-page__character-subtitle">
                     Voice actor:{" "}
-                    {animeCharacters[0]?.voice_actors[0]?.person.name}
+                    {animeCharacters[0]?.voice_actors[id]?.person.name}
                   </p>
-                </div>
+                ) : null}
               </div>
             </div>
           </div>
-        ) : null
-      )
+        </div>
+      ))
     : null;
 
   const buttons = (

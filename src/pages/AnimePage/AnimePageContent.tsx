@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { useAuthContext } from "../../../contexts/AuthContext";
-import { useFetchContext } from "../../../contexts/FetchContext";
-import { Rotator } from "../../../components/Rotator";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { useFetchContext } from "../../contexts/FetchContext";
+import { Rotator } from "../../components/Rotator";
 
 const AnimePageContent = () => {
   const {

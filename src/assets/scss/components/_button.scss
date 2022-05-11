@@ -12,12 +12,12 @@
   font-weight: bold;
   letter-spacing: 1px;
 
-  .button__title {
+  &__title {
     position: relative;
     transition: all 0.3s;
   }
 
-  .button__subtitle {
+  &__subtitle {
     position: absolute;
     transition: all 0.3s;
     transform: translate(0, 100%);
@@ -26,6 +26,7 @@
 
   &:hover {
     background-color: $color-1;
+
     .button__title {
       transform: translate(0, -100%);
       opacity: 0;

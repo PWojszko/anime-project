@@ -1,66 +1,107 @@
 .userpanel-page {
   display: flex;
   width: 100%;
-  padding: 25px 15px;
+  padding: $padding-1;
 
-  .userpanel-page__title-container {
+  .userpanel-page-watermark {
     height: 100%;
 
-    .userpanel-page__title {
+    &__title {
       writing-mode: vertical-rl;
       font-size: 100px;
       color: $watermark-color-1;
     }
   }
 
-  .userpanel-page__container {
-    .userpanel-page__subtitle {
-      position: absolute;
-      right: $padding-1;
-      top: $padding-1;
-      background-color: $color-2;
-      padding: $padding-1;
-      border-radius: $radius-1;
-      opacity: 1;
-      transition: all 0.3s;
-    }
+  &__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: $padding-1;
 
-    .userpanel-page__list {
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      grid-template-rows: auto;
-      grid-gap: 30px;
-      max-height: 450px;
-      overflow: hidden;
-      box-shadow: inset 0px -30px 20px -20px $color-dark-2;
-      transition: 0.3s all;
+    .user-profile {
+      display: flex;
+      flex-direction: column;
+      gap: $padding-1;
 
-      &.userpanel-page__list--active {
-        max-height: 100%;
+      .title-container {
+        display: flex;
+        position: relative;
+        place-items: center;
+
+        &__title {
+          padding-right: $padding-1;
+        }
+
+        &__line {
+          flex: 1;
+          background-color: $color-1;
+          height: 2px;
+        }
       }
 
-      .userpanel-page__card {
+      .user-details {
+        display: flex;
+        gap: $padding-1;
+
+        &__image {
+          width: 200px;
+          height: 300px;
+          object-fit: cover;
+          border-radius: $radius-1;
+        }
+
+        &__text {
+        }
+      }
+    }
+
+    .watched-anime {
+      &__title {
+        padding-bottom: $padding-1;
+        transition: all 0.3s;
+      }
+
+      &__list {
         position: relative;
         display: grid;
-        grid-template-columns: auto 1fr 1fr;
-        gap: 20px;
-        align-items: center;
-        background-color: $color-dark-3;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: auto;
+        grid-gap: 30px;
+        max-height: 450px;
+        overflow: hidden;
+        box-shadow: inset 0px -30px 20px -20px $color-dark-2;
+        transition: 0.3s all;
 
-        z-index: -1;
-        .userpanel-page__image {
-          height: 100px;
-          padding: 15px;
+        &--active {
+          max-height: 100%;
         }
-        .userpanel-page__title {
+
+        .watched-anime-card {
+          position: relative;
+          display: grid;
+          grid-template-columns: auto 1fr 1fr;
+          gap: 20px;
+          align-items: center;
+          background-color: $color-dark-3;
+          border-radius: $radius-1;
+
+          z-index: -1;
+
+          &__image {
+            height: 100px;
+            padding: 15px;
+          }
+
+          &__title {
+          }
         }
       }
-    }
 
-    .userpanel-page__seemore {
-      width: 100%;
-      border-radius: 0 0 $radius-1 $radius-1;
+      &__button {
+        width: 100%;
+        border-radius: 0 0 $radius-1 $radius-1;
+      }
     }
   }
 }

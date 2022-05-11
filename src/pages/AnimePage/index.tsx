@@ -1,4 +1,4 @@
-import AnimePageContent from "./components/AnimePageContent";
+import AnimePageContent from "./AnimePageContent";
 
 export const AnimePage = () => {
   return (

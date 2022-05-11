@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 import { useFetchContext } from "../contexts/FetchContext";
-import AnimePageContent from "../pages/AnimePage/components/AnimePageContent";
+import AnimePageContent from "../pages/AnimePage/AnimePageContent";
 
 const SearchBar = () => {
   const { animeById, animeCharacters, getAnimeById, getAnimeCharacters } =

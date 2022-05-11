@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { getDatabase, ref, onValue } from "firebase/database";
 import axios from "axios";
 
-import { useAuthContext } from "../../../contexts/AuthContext";
-import { useFetchContext } from "../../../contexts/FetchContext";
-import { auth } from "../../../firebase";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { useFetchContext } from "../../contexts/FetchContext";
+import { auth } from "../../firebase";
 
 type WatchedAnimeType = {
   title?: string;
@@ -16,10 +16,7 @@ type WatchedAnimeType = {
   };
 };
 
-export const WatchedAnime = ({ mal_id }: any) => {
-  const { register, isAuth } = useAuthContext();
-  const { fetchAnimeByIdData, animeById } = useFetchContext();
-
+const WatchedAnimeCard = ({ mal_id }: any) => {
   const [watchedAnime, setWatchedAnime] = useState<WatchedAnimeType | null>(
     null
   );
@@ -39,16 +36,18 @@ export const WatchedAnime = ({ mal_id }: any) => {
   }, []);
 
   return (
-    <div className="userpanel-page__card">
+    <div className="watched-anime-card">
       <img
-        className="userpanel-page__image"
+        className="watched-anime-card__image"
         src={watchedAnime?.images?.webp.image_url}
         alt={watchedAnime?.title}
       />
-      <p className="userpanel-page__title">{watchedAnime?.title}</p>
+      <p className="watched-anime-card__title">{watchedAnime?.title}</p>
       <p>
         Rate: <strong>8/10</strong>
       </p>
     </div>
   );
 };
+
+export default WatchedAnimeCard;

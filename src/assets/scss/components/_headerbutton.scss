@@ -7,10 +7,11 @@
     float: right;
     transition: all 0.3s;
     background-color: $color-dark-2;
+    margin-right: -$padding-1;
     border-radius: $radius-1 0 0 $radius-1;
     transform: translate(0, -50%);
-
     cursor: pointer;
+
     .header__button-line {
       position: absolute;
       top: 50%;

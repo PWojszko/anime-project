@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import Navigation from "./Navigation";
+import SearchBar from "../components/SearchBar";
 
 const Header = () => {
   const [isActive, setIsActive] = useState(false);
@@ -28,8 +29,9 @@ const Header = () => {
           </div>
         </Link>
       </div>
-      {setActiveButton}
+      <SearchBar />
       <Navigation />
+      {setActiveButton}
     </header>
   );
 };

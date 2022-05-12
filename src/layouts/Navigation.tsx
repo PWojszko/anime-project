@@ -3,8 +3,16 @@ import { NavLink, Link } from "react-router-dom";
 
 import SearchBar from "../components/SearchBar";
 // import { useAuth } from "../contexts/AuthContext.tsx";
+import SlidingButton from "../components/SlidingButton";
 
 import { useAuthContext } from "../contexts/AuthContext";
+
+import {
+  BsArrowBarRight,
+  BsPersonPlusFill,
+  BsPersonLinesFill,
+  BsDoorOpenFill,
+} from "react-icons/bs";
 
 const list = [{ name: "Start", path: "/", exact: true }];
 
@@ -24,41 +32,43 @@ const Navigation = () => {
       {isAuth ? (
         <>
           <Link to="/userpanel">
-            <button className="button header__login-button">
-              <span className="button__title">{currentUser}</span>
-              <span className="button__subtitle">User Panel</span>
-            </button>
+            <div className="navigation__item">
+              <BsPersonLinesFill />
+              <SlidingButton
+                firstText={currentUser?.toString()}
+                secondText="User Panel"
+              />
+            </div>
           </Link>
-          <button onClick={logout} className="button header__login-button">
-            <span className="button__title">Log out</span>
-            <span className="button__subtitle">Log out</span>
-          </button>
+
+          <div onClick={logout} className="logout">
+            <div className="navigation__item">
+              <BsDoorOpenFill />
+              <SlidingButton firstText="Log out" secondText="Sure?" />
+            </div>
+          </div>
         </>
       ) : (
         <>
           <Link to="/login">
-            <button className="button header__login-button">
-              <span className="button__title">Log in</span>
-              <span className="button__subtitle">Log in</span>
-            </button>
+            <div className="navigation__item">
+              <BsArrowBarRight />
+              <SlidingButton firstText="Log in" secondText="Log in" />
+            </div>
           </Link>
+
           <Link to="/register">
-            <button className="button header__register-button">
-              <span className="button__title">Sign in</span>
-              <span className="button__subtitle">Sign in</span>
-            </button>
+            <div className="navigation__item">
+              <BsPersonPlusFill />
+              <SlidingButton firstText="Sign in" secondText="Sign in" />
+            </div>
           </Link>
         </>
       )}
     </>
   );
 
-  return (
-    <nav className="header__nav">
-      <SearchBar />
-      {navButtons}
-    </nav>
-  );
+  return <nav className="navigation">{navButtons}</nav>;
 };
 
 export default Navigation;

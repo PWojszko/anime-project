@@ -1,64 +1,84 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { matchRoutes, useParams } from "react-router-dom";
+import { skipToken } from "@reduxjs/toolkit/query/react";
 
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useFetchContext } from "../../contexts/FetchContext";
 import { Rotator } from "../../components/Rotator";
 
+//types
+import anime from "../../types/anime";
+
+// redux
+import {
+  useGetAnimeByIdQuery,
+  useGetAnimeCharactersQuery,
+} from "../../redux/api";
+
 const AnimePageContent = () => {
-  const {
-    animeById,
-    animeCharacters,
-    loadingAnimeById,
-    loadingAnimeCharacters,
-  } = useFetchContext();
+  const params: anime = useParams();
+  const id = params?.id;
+
+  const anime = useGetAnimeByIdQuery(id ?? skipToken);
+  const animeData = anime.data;
+  const animeError = anime.error;
+  const animeIsLoading = anime.isLoading;
+
+  const character = useGetAnimeCharactersQuery(id ?? skipToken);
+  const characterData = character?.data;
+  const characterError = character?.error;
+  const characterIsLoading = character?.isLoading;
+
+  const { animeCharacters } = useFetchContext();
   const { didUserWatchedAnime } = useAuthContext();
   const [isWatched, setIsWatched] = useState(false);
 
   const clickHandler = () => {
-    if (animeById?.mal_id) {
-      const { mal_id } = animeById;
+    if (animeData?.data?.mal_id) {
+      const mal_id = animeData?.data?.mal_id;
       didUserWatchedAnime(mal_id, !isWatched);
     }
     setIsWatched((prev) => !prev);
   };
 
-  const image =
-    animeById?.images && !loadingAnimeById ? (
-      <div className="anime-page__image-container">
-        <img
-          className="anime-page__image"
-          src={animeById?.images.webp.image_url}
-          alt={animeById?.title}
-        />
-      </div>
-    ) : null;
+  const imageUrl = animeData?.data?.images?.webp?.image_url;
+  const ytUrl = animeData?.data?.trailer?.embed_url;
+  const images = animeData?.data?.images;
+  const title = animeData?.data?.title;
+  const titleJapan = animeData?.data?.title_japanese;
 
-  const youtube =
-    animeById?.trailer && !loadingAnimeById ? (
-      <iframe
-        src={animeById?.trailer.embed_url}
-        title="YouTube video player"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      ></iframe>
-    ) : null;
+  const type = animeData?.data?.type;
+  const episodes = animeData?.data?.episodes;
+  const score = animeData?.data?.score;
+  const year = animeData?.data?.year;
 
-  const watermark =
-    animeById?.title_japanese && !loadingAnimeById
-      ? animeById?.title_japanese
-      : null;
+  const image = !animeIsLoading ? (
+    <div className="anime-page__image-container">
+      <img className="anime-page__image" src={imageUrl} alt={title} />
+    </div>
+  ) : null;
 
-  const parametersList = !loadingAnimeById
+  const youtube = !animeIsLoading ? (
+    <iframe
+      src={ytUrl}
+      title="YouTube video player"
+      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    ></iframe>
+  ) : null;
+
+  const watermark = !animeIsLoading ? titleJapan : "Ani|me";
+
+  const parametersList = !animeIsLoading
     ? [
-        { text: "Type", api: animeById?.type },
-        { text: "Episodes", api: animeById?.episodes },
-        { text: "Score", api: animeById?.score },
-        { text: "Year", api: animeById?.year },
+        { text: "Type", api: type },
+        { text: "Episodes", api: episodes },
+        { text: "Score", api: score },
+        { text: "Year", api: year },
       ]
     : null;
 
-  const parametersListMap = !loadingAnimeById
+  const parametersListMap = !animeIsLoading
     ? parametersList?.map((parameter, id) =>
         parameter.api ? (
           <div className="anime-page__parameter-item" key={id}>
@@ -69,39 +89,39 @@ const AnimePageContent = () => {
       )
     : null;
 
-  const animeCharactersMap = !loadingAnimeCharacters
-    ? animeCharacters?.map((character: any, id: number) => (
-        <div key={id} className="anime-page__character-container rotator__item">
-          <div
-            className="anime-page__character-item"
-            key={character?.character.mal_id}
-          >
-            <div className="anime-page__character-text">
-              <div className="anime-page__title-container">
-                <div className="anime-page__line"></div>
-                <p className="anime-page__character-title">
-                  {character?.character.name}
+  const animeCharactersMap = characterData?.data?.map(
+    (character: any, id: number) => (
+      <div key={id} className="anime-page__character-container rotator__item">
+        <div
+          className="anime-page__character-item"
+          key={character?.character.mal_id}
+        >
+          <div className="anime-page__character-text">
+            <div className="anime-page__title-container">
+              <div className="anime-page__line"></div>
+              <p className="anime-page__character-title">
+                {character?.character.name}
+              </p>
+            </div>
+            <img
+              className="anime-page__character-image"
+              src={character.character?.images.webp.image_url}
+              alt={character.character?.name}
+            />
+            <div className="anime-page__subtitle-container">
+              <div className="anime-page__line"></div>
+              {animeCharacters[0]?.voice_actors[id] ? (
+                <p className="anime-page__character-subtitle">
+                  {"Voice actor: " +
+                    animeCharacters[0]?.voice_actors[id]?.person.name}
                 </p>
-              </div>
-              <img
-                className="anime-page__character-image"
-                src={character.character?.images.webp.image_url}
-                alt={character.character?.name}
-              />
-              <div className="anime-page__subtitle-container">
-                <div className="anime-page__line"></div>
-                {animeCharacters[0]?.voice_actors[id] ? (
-                  <p className="anime-page__character-subtitle">
-                    Voice actor:{" "}
-                    {animeCharacters[0]?.voice_actors[id]?.person.name}
-                  </p>
-                ) : null}
-              </div>
+              ) : null}
             </div>
           </div>
         </div>
-      ))
-    : null;
+      </div>
+    )
+  );
 
   const buttons = (
     <div className="anime-page_buttons">
@@ -129,8 +149,8 @@ const AnimePageContent = () => {
       <p className="anime-page__watermark">{watermark}</p>
       <div className="anime-page__content">
         <div className="anime-page__content-part">
-          <h1 className="anime-page__title">{animeById?.title}</h1>
-          <p className="anime-page__text">{animeById?.synopsis}</p>
+          <h1 className="anime-page__title">{animeData?.data?.title}</h1>
+          <p className="anime-page__text">{animeData?.data?.synopsis}</p>
         </div>
         <div className="anime-page__container">
           {buttons}

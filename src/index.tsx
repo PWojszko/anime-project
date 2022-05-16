@@ -3,9 +3,14 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+// context
 import FetchContextProvider from "./contexts/FetchContext";
 import AuthContextProvider from "./contexts/AuthContext";
 import RWDContextProvider from "./contexts/RWDContext";
+
+//redux
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 import App from "./layouts/App";
 import "./assets/scss/main.scss";
@@ -16,13 +21,15 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <FetchContextProvider>
-        <AuthContextProvider>
-          <RWDContextProvider>
-            <App />
-          </RWDContextProvider>
-        </AuthContextProvider>
-      </FetchContextProvider>
+      <Provider store={store}>
+        <FetchContextProvider>
+          <AuthContextProvider>
+            <RWDContextProvider>
+              <App />
+            </RWDContextProvider>
+          </AuthContextProvider>
+        </FetchContextProvider>
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );

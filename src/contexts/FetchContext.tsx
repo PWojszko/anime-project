@@ -46,7 +46,6 @@ type FetchValue = {
   loadingTopAnime: boolean;
   loadingCurrentAnime: boolean;
   loadingAnimeById: boolean;
-  loadingAnimeCharacters: boolean;
 };
 
 export const FetchContext = createContext<FetchValue | undefined>(undefined);
@@ -76,7 +75,7 @@ const FetchContextProvider = ({ children }: Props) => {
     if (location.pathname === "/") fetchCurrentAnimeData();
     if (location.pathname === "/") fetchTopAnimeData();
     if (location.pathname === "/") fetchUpcomingAnimeData();
-    if (locationNumber > 0) fetchAnimeByIdData();
+    // if (locationNumber > 0) fetchAnimeByIdData();
     if (locationNumber > 0) fetchAnimeCharactersData();
   }, [location.pathname]);
 
@@ -119,21 +118,20 @@ const FetchContextProvider = ({ children }: Props) => {
     setLoadingCurrentAnime(false);
   };
 
-  const fetchAnimeByIdData = async (id: number = locationNumber) => {
-    setLoadingAnimeById(true);
-    try {
-      const { data: response } = await axios.get(
-        `https://api.jikan.moe/v4/anime/${id}`
-      );
-      setAnimeById(response.data);
-    } catch (error) {
-      console.error("AnimeById error");
-    }
-    setLoadingAnimeById(false);
-  };
+  // const fetchAnimeByIdData = async (id: number = locationNumber) => {
+  //   setLoadingAnimeById(true);
+  //   try {
+  //     const { data: response } = await axios.get(
+  //       `https://api.jikan.moe/v4/anime/${id}`
+  //     );
+  //     setAnimeById(response.data);
+  //   } catch (error) {
+  //     console.error("AnimeById error");
+  //   }
+  //   setLoadingAnimeById(false);
+  // };
 
   const fetchAnimeCharactersData = async () => {
-    setLoadingAnimeCharacters(true);
     try {
       const { data: response } = await axios.get(
         `https://api.jikan.moe/v4/anime/${locationNumber}/characters`
@@ -142,7 +140,6 @@ const FetchContextProvider = ({ children }: Props) => {
     } catch (error) {
       console.error("AnimeCharacters error");
     }
-    setLoadingAnimeCharacters(false);
   };
 
   return (
@@ -157,8 +154,6 @@ const FetchContextProvider = ({ children }: Props) => {
         loadingTopAnime,
         loadingCurrentAnime,
         loadingAnimeById,
-        loadingAnimeCharacters,
-        fetchAnimeByIdData,
       }}
     >
       {children}

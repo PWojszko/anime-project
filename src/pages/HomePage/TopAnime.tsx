@@ -4,14 +4,21 @@ import { useDraggable } from "react-use-draggable-scroll";
 
 import { useFetchContext } from "../../contexts/FetchContext";
 
+//types
+import anime from "../../types/anime";
+
+// redux
+import { useGetAnimeListQuery } from "../../redux/api";
+
 const TopAnime = () => {
-  const { topAnime } = useFetchContext();
   const ref = useRef() as React.MutableRefObject<HTMLInputElement>;
   const { events } = useDraggable(ref, {
     applyRubberBandEffect: true,
   });
 
-  const TopAnimeList = topAnime?.map((anime) => (
+  const { data, error, isLoading } = useGetAnimeListQuery("top/anime");
+
+  const TopAnimeList: JSX.Element = data?.data?.map((anime: anime) => (
     <Link key={anime?.mal_id} to={`/anime/${anime?.mal_id}`}>
       <div className="carousel__item">
         <p className="carousel__item-title">{anime?.title}</p>

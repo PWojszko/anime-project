@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { skipToken } from "@reduxjs/toolkit/query/react";
 
 import { useAuthContext } from "../../contexts/AuthContext";
 
@@ -9,6 +8,7 @@ import anime from "../../types/anime";
 
 // redux
 import { useGetAnimeByIdQuery } from "../../redux/api";
+import { skipToken } from "@reduxjs/toolkit/query/react";
 
 const Content = () => {
   const { didUserWatchedAnime } = useAuthContext();

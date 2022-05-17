@@ -15,8 +15,14 @@ export const animeListApi = createApi({
     GetAnimeCharacters: builder.query<character, number>({
       query: (id) => `anime/${id}/characters`,
     }),
+    GetAnimeList: builder.query<anime, string>({
+      query: (path) => path,
+    }),
   }),
 });
 
-export const { useGetAnimeByIdQuery, useGetAnimeCharactersQuery } =
-  animeListApi;
+export const {
+  useGetAnimeByIdQuery,
+  useGetAnimeCharactersQuery,
+  useGetAnimeListQuery,
+} = animeListApi;

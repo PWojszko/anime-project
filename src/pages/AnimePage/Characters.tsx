@@ -17,8 +17,6 @@ const Characters = () => {
     id ?? skipToken
   );
 
-  // console.log(data?.data && typeof data?.data[0]?.voice_actors[0]);
-
   const animeCharactersMap: JSX.Element = data?.data?.map(
     (character: character, id: number) => (
       <div key={id} className="anime-page__character-container rotator__item">

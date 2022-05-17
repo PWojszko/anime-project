@@ -1,9 +1,9 @@
-import AnimePageContent from "./AnimePageContent";
+import Article from "./Article";
 
 export const AnimePage = () => {
   return (
     <div className="anime-page">
-      <AnimePageContent />
+      <Article />
     </div>
   );
 };

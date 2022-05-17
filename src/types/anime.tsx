@@ -1,7 +1,6 @@
 type anime = {
   id?: number;
   data?: {
-    map?: any;
     mal_id?: number;
     title?: string;
     synopsis?: string;

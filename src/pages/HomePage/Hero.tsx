@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { useFetchContext } from "../../../contexts/FetchContext";
-import "../../../images/hero-bg.webp";
+import { useFetchContext } from "../../contexts/FetchContext";
+import "../../images/hero-bg.webp";
 
 const Hero = () => {
   const { upcomingAnime } = useFetchContext();

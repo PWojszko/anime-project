@@ -1,6 +1,6 @@
-import CurrentSeasonAnime from "./components/CurrentSeasonAnime";
-import TopAnime from "./components/TopAnime";
-import Hero from "./components/Hero";
+import CurrentSeasonAnime from "./CurrentSeasonAnime";
+import TopAnime from "./TopAnime";
+import Hero from "./Hero";
 
 export function HomePage() {
   return (

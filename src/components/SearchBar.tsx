@@ -1,10 +1,9 @@
-import React, { FC, useEffect } from "react";
-import { useState, useRef } from "react";
+import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 import { useFetchContext } from "../contexts/FetchContext";
-import AnimePageContent from "../pages/AnimePage/AnimePageContent";
 
 const SearchBar = () => {
   const { animeById, animeCharacters, getAnimeById, getAnimeCharacters } =

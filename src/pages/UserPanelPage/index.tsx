@@ -17,7 +17,6 @@ import {
 } from "firebase/database";
 
 import { useAuthContext } from "../../contexts/AuthContext";
-import { useFetchContext } from "../../contexts/FetchContext";
 import { auth } from "../../firebase";
 import WatchedAnimeList from "./WatchedAnimeList";
 import UserProfile from "./UserProfile";

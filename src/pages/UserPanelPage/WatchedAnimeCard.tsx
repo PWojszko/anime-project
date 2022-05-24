@@ -4,7 +4,6 @@ import { getDatabase, ref, onValue } from "firebase/database";
 import axios from "axios";
 
 import { useAuthContext } from "../../contexts/AuthContext";
-import { useFetchContext } from "../../contexts/FetchContext";
 import { auth } from "../../firebase";
 
 type WatchedAnimeType = {
@@ -22,17 +21,17 @@ const WatchedAnimeCard = ({ mal_id }: any) => {
   );
 
   useEffect(() => {
-    const fetchAnimeByIdData = async (mal_id: number) => {
-      try {
-        const { data: response } = await axios.get(
-          `https://api.jikan.moe/v4/anime/${mal_id}`
-        );
-        setWatchedAnime(response.data);
-      } catch (error) {
-        console.error("AnimeById error");
-      }
-    };
-    fetchAnimeByIdData(mal_id);
+    // const fetchAnimeByIdData = async (mal_id: number) => {
+    //   try {
+    //     const { data: response } = await axios.get(
+    //       `https://api.jikan.moe/v4/anime/${mal_id}`
+    //     );
+    //     setWatchedAnime(response.data);
+    //   } catch (error) {
+    //     console.error("AnimeById error");
+    //   }
+    // };
+    // fetchAnimeByIdData(mal_id);
   }, []);
 
   return (

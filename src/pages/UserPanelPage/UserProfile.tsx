@@ -4,14 +4,12 @@ import { getDatabase, ref, onValue } from "firebase/database";
 import axios from "axios";
 
 import { useAuthContext } from "../../contexts/AuthContext";
-import { useFetchContext } from "../../contexts/FetchContext";
 import { auth } from "../../firebase";
 
 import image from "../../images/placeholder.webp";
 
 const UserProfile = () => {
   const { register, isAuth } = useAuthContext();
-  const { fetchAnimeByIdData, animeById } = useFetchContext();
 
   const user = auth?.currentUser?.email;
   const db = getDatabase();

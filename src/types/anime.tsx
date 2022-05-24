@@ -1,6 +1,6 @@
 type animeInteriorType = {
+  [key: string]: any;
   id?: number;
-  map?: any;
   mal_id?: number;
   title?: string;
   synopsis?: string;

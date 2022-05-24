@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
-import { useFetchContext } from "../contexts/FetchContext";
 import { useAuthContext } from "../contexts/AuthContext";
 
 import Header from "./Header";

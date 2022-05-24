@@ -34,7 +34,7 @@ type Data = {
 
 type FetchValue = {
   animeById?: AnimeByIdType | null | undefined;
-  animeCharacters?: any | null | undefined; // to do types
+  animeCharacters?: any | null | undefined; to do types
   topAnime?: Data[] | null | undefined;
   currentAnime?: Data[] | null | undefined;
   upcomingAnime?: Data[] | null | undefined;
@@ -42,7 +42,7 @@ type FetchValue = {
   getAnimeById?: (location: number) => void;
   getAnimeCharacters?: (location: number) => void;
   fetchAnimeByIdData?: (id: number) => void;
-  setAnimeById?: any; // to do types
+  setAnimeById?: any; to do types
   loadingTopAnime: boolean;
   loadingCurrentAnime: boolean;
   loadingAnimeById: boolean;
@@ -75,7 +75,7 @@ const FetchContextProvider = ({ children }: Props) => {
     if (location.pathname === "/") fetchCurrentAnimeData();
     if (location.pathname === "/") fetchTopAnimeData();
     if (location.pathname === "/") fetchUpcomingAnimeData();
-    // if (locationNumber > 0) fetchAnimeByIdData();
+    if (locationNumber > 0) fetchAnimeByIdData();
     if (locationNumber > 0) fetchAnimeCharactersData();
   }, [location.pathname]);
 
@@ -118,18 +118,18 @@ const FetchContextProvider = ({ children }: Props) => {
     setLoadingCurrentAnime(false);
   };
 
-  // const fetchAnimeByIdData = async (id: number = locationNumber) => {
-  //   setLoadingAnimeById(true);
-  //   try {
-  //     const { data: response } = await axios.get(
-  //       `https://api.jikan.moe/v4/anime/${id}`
-  //     );
-  //     setAnimeById(response.data);
-  //   } catch (error) {
-  //     console.error("AnimeById error");
-  //   }
-  //   setLoadingAnimeById(false);
-  // };
+  const fetchAnimeByIdData = async (id: number = locationNumber) => {
+    setLoadingAnimeById(true);
+    try {
+      const { data: response } = await axios.get(
+        `https://api.jikan.moe/v4/anime/${id}`
+      );
+      setAnimeById(response.data);
+    } catch (error) {
+      console.error("AnimeById error");
+    }
+    setLoadingAnimeById(false);
+  };
 
   const fetchAnimeCharactersData = async () => {
     try {

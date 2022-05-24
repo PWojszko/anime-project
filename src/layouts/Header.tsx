@@ -9,7 +9,7 @@ const Header = () => {
 
   const handleClick = () => setIsActive((prev) => !prev);
 
-  const setActiveButton = (
+  const setActiveButton: JSX.Element = (
     <div className="header__button" onClick={handleClick}>
       <div className="header__button-line header__button-line-1"></div>
       <div className="header__button-line header__button-line-2"></div>

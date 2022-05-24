@@ -1,22 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
-import { useFetchContext } from "../contexts/FetchContext";
+//types
+import anime from "../types/anime";
+
+// redux
+import { useGetAnimeListQuery, useLazyGetAnimeListQuery } from "../redux/api";
 
 const SearchBar = () => {
-  const { animeById, animeCharacters, getAnimeById, getAnimeCharacters } =
-    useFetchContext();
-
   const [searchValue, setSearchValue] = useState("");
-  const [searchedAnime, setSearchedAnime] = useState([]);
-  let location = useLocation();
-
-  interface searchResultInterface {
-    mal_id: number;
-    title: string;
-  }
+  const [searchedAnime, setSearchedAnime] = useState<anime>();
+  const [trigger, result, lastPromiseInfo] = useLazyGetAnimeListQuery();
 
   const handleSearch = (e: {
     target: { value: React.SetStateAction<string> };
@@ -26,16 +22,20 @@ const SearchBar = () => {
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    const searchAnime = async () => {
-      const temp = await fetch(
-        `https://api.jikan.moe/v4/anime?q=${searchValue}`
-      ).then((res) => res.json());
-      setSearchedAnime(temp.data.slice(0, 5));
-    };
-    searchAnime();
+    trigger("anime?q=" + searchValue);
   };
 
-  const searchedAnimeList = searchedAnime?.map(
+  useEffect(() => {
+    const array = result?.data?.data;
+    setSearchedAnime(array?.slice(0, 5));
+  }, [result]);
+
+  interface searchResultInterface {
+    mal_id: number;
+    title: string;
+  }
+
+  const searchedAnimeList: JSX.Element = searchedAnime?.map(
     (anime: searchResultInterface) => (
       <li key={anime?.mal_id}>
         <Link to={`/anime/${anime?.mal_id}`}>{anime?.title}</Link>

@@ -25,4 +25,5 @@ export const {
   useGetAnimeByIdQuery,
   useGetAnimeCharactersQuery,
   useGetAnimeListQuery,
+  useLazyGetAnimeListQuery,
 } = animeListApi;

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { getDatabase, ref, onValue } from "firebase/database";
 
 import { useAuthContext } from "../../contexts/AuthContext";
-import { useFetchContext } from "../../contexts/FetchContext";
 import { auth } from "../../firebase";
 import WatchedAnimeCard from "./WatchedAnimeCard";
 

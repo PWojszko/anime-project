@@ -4,7 +4,6 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // context
-import FetchContextProvider from "./contexts/FetchContext";
 import AuthContextProvider from "./contexts/AuthContext";
 import RWDContextProvider from "./contexts/RWDContext";
 
@@ -22,13 +21,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <FetchContextProvider>
-          <AuthContextProvider>
-            <RWDContextProvider>
-              <App />
-            </RWDContextProvider>
-          </AuthContextProvider>
-        </FetchContextProvider>
+        <AuthContextProvider>
+          <RWDContextProvider>
+            <App />
+          </RWDContextProvider>
+        </AuthContextProvider>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>

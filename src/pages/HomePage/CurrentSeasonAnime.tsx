@@ -14,20 +14,25 @@ const CurrentSeasonAnime = () => {
     applyRubberBandEffect: true,
   });
 
-  const { data, error, isLoading } = useGetAnimeListQuery("seasons/now");
+  const { data, error, isLoading, isSuccess } =
+    useGetAnimeListQuery("seasons/now");
 
-  const currentAnimeList: JSX.Element = data?.data?.map((anime: anime) => (
-    <Link key={anime?.mal_id} to={`/anime/${anime?.mal_id}`}>
-      <div className="carousel__item">
-        <p className="carousel__item-title">{anime?.title}</p>
-        <img
-          className="carousel__item-image"
-          src={anime?.images?.webp?.image_url}
-          alt={anime?.title}
-        />
-      </div>
-    </Link>
-  ));
+  const currentAnimeList: JSX.Element = data?.data?.map((anime: anime) =>
+    isLoading && !error ? (
+      <p>Loading</p>
+    ) : (
+      <Link key={anime?.mal_id} to={`/anime/${anime?.mal_id}`}>
+        <div className="carousel__item">
+          <p className="carousel__item-title">{anime?.title}</p>
+          <img
+            className="carousel__item-image"
+            src={anime?.images?.webp?.image_url}
+            alt={anime?.title}
+          />
+        </div>
+      </Link>
+    )
+  );
 
   return (
     <>

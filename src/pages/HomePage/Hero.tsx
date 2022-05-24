@@ -1,20 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { useFetchContext } from "../../contexts/FetchContext";
+// import { useFetchContext } from "../../contexts/FetchContext";
 import "../../images/hero-bg.webp";
 
+//types
+import anime from "../../types/anime";
+
+// redux
+import { useGetAnimeListQuery } from "../../redux/api";
+
 const Hero = () => {
-  const { upcomingAnime } = useFetchContext();
-  const currentAnime = upcomingAnime?.[0];
+  const { data, error, isLoading, isSuccess } =
+    useGetAnimeListQuery("seasons/upcoming");
 
-  const imgSrc = currentAnime?.images?.webp?.image_url;
-  const imgAlt = currentAnime?.title;
+  const firstElement = data?.data && data?.data[0];
 
-  const title = currentAnime?.title;
-  const synopsis = currentAnime?.synopsis?.slice(0, 500) + "...";
+  const imgSrc: string = firstElement?.images?.webp?.image_url;
+  const imgAlt: string = firstElement?.title;
+  const title: string = firstElement?.title;
+  const synopsis: string = firstElement?.synopsis?.slice(0, 500) + "...";
+
   const button = (
-    <Link to={`/anime/${currentAnime?.mal_id}`}>
+    <Link to={`/anime/${firstElement?.mal_id}`}>
       <button className="hero__button button">See more</button>
     </Link>
   );

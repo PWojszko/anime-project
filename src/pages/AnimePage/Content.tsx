@@ -36,6 +36,11 @@ const Content = () => {
     </div>
   );
 
+  const scorePoints = [1, 2, 3, 4, 5];
+  const scorePointsMap = scorePoints.map((point: number) => (
+    <button className="anime-page_button-score button">{point}</button>
+  ));
+
   const buttons = (
     <div className="anime-page_buttons">
       <div className="anime-page_buttons-container">
@@ -47,11 +52,7 @@ const Content = () => {
         </button>
         <div className="anime-page_button anime-page_button-rate button">
           <span className="anime-page_button-text">Rate</span>
-          <button className="anime-page_button-score button">1</button>
-          <button className="anime-page_button-score button">2</button>
-          <button className="anime-page_button-score button">3</button>
-          <button className="anime-page_button-score button">4</button>
-          <button className="anime-page_button-score button">5</button>
+          {scorePointsMap}
         </div>
       </div>
     </div>

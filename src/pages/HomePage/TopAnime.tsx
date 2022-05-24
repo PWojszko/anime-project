@@ -2,8 +2,6 @@ import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useDraggable } from "react-use-draggable-scroll";
 
-import { useFetchContext } from "../../contexts/FetchContext";
-
 //types
 import anime from "../../types/anime";
 
@@ -16,7 +14,8 @@ const TopAnime = () => {
     applyRubberBandEffect: true,
   });
 
-  const { data, error, isLoading } = useGetAnimeListQuery("top/anime");
+  const { data, error, isLoading, isSuccess } =
+    useGetAnimeListQuery("top/anime");
 
   const TopAnimeList: JSX.Element = data?.data?.map((anime: anime) => (
     <Link key={anime?.mal_id} to={`/anime/${anime?.mal_id}`}>

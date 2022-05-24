@@ -1,18 +1,9 @@
-import React, { useRef, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getDatabase, ref, onValue } from "firebase/database";
-import axios from "axios";
-
-import { useAuthContext } from "../../contexts/AuthContext";
 import { auth } from "../../firebase";
 
 import image from "../../images/placeholder.webp";
 
 const UserProfile = () => {
-  const { register, isAuth } = useAuthContext();
-
   const user = auth?.currentUser?.email;
-  const db = getDatabase();
 
   return (
     <section className="user-profile">

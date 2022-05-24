@@ -1,14 +1,3 @@
-import React, { useRef, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getDatabase, ref, onValue } from "firebase/database";
-import axios from "axios";
-
-import { useAuthContext } from "../../contexts/AuthContext";
-import { auth } from "../../firebase";
-
-//types
-import anime from "../../types/anime";
-
 // redux
 import { useGetAnimeByIdQuery } from "../../redux/api";
 import { skipToken } from "@reduxjs/toolkit/query/react";

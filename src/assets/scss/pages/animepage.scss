@@ -1,11 +1,13 @@
 .anime-page {
+  max-width: 100vw;
+  overflow-x: hidden;
   .anime-page__article {
     max-width: 1170px;
     margin: 0 auto;
     padding: 125px 15px;
 
     .anime-page__watermark {
-      position: absolute;
+      position: fixed;
       left: 0;
       font-size: 200px;
       color: rgba($color-light-1, 0.05);
@@ -91,10 +93,10 @@
     // characters
     .anime-page__character-list {
       display: flex;
-      margin-bottom: 50px;
+
       overflow-x: hidden;
       padding-bottom: 20px;
-      margin: 0 -20px;
+      margin: 0;
 
       .anime-page__character-container {
         .anime-page__character-item {

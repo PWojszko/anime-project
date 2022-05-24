@@ -2,10 +2,18 @@
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   grid-template-rows: 1fr auto;
-  grid-template-areas:
-    "header content"
-    "footer footer";
   min-height: 100vh;
+
+  grid-template-areas:
+    "header header"
+    "content content"
+    "footer footer";
+
+  @include md {
+    grid-template-areas:
+      "header content"
+      "footer footer";
+  }
 }
 
 .header {

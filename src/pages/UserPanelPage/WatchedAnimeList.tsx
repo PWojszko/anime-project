@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { getDatabase, ref, onValue } from "firebase/database";
 
 import { useAuthContext } from "../../contexts/AuthContext";
@@ -43,7 +42,7 @@ const WatchedAnimeList = () => {
   const button =
     watchedAnimeMapContainer.props.children.length >= 4 ? (
       <button onClick={handleClick} className="button watched-anime__button">
-        {isActive ? "See more" : "See less"}
+        {isActive ? "See less" : "See more"}
       </button>
     ) : null;
 

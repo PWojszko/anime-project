@@ -13,9 +13,7 @@ import character from "../../types/character";
 const Characters = () => {
   const params: anime = useParams();
   const id = params?.id;
-  const { data, error, isLoading } = useGetAnimeCharactersQuery(
-    id ?? skipToken
-  );
+  const { data } = useGetAnimeCharactersQuery(id ?? skipToken);
 
   const animeCharactersMap: JSX.Element = data?.data?.map(
     (character: character, id: number) => (

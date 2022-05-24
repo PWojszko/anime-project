@@ -6,7 +6,15 @@ import axios from "axios";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { auth } from "../../firebase";
 
+//types
+import anime from "../../types/anime";
+
+// redux
+import { useGetAnimeByIdQuery } from "../../redux/api";
+import { skipToken } from "@reduxjs/toolkit/query/react";
+
 type WatchedAnimeType = {
+  mal_id?: number;
   title?: string;
   images?: {
     webp: {
@@ -15,33 +23,17 @@ type WatchedAnimeType = {
   };
 };
 
-const WatchedAnimeCard = ({ mal_id }: any) => {
-  const [watchedAnime, setWatchedAnime] = useState<WatchedAnimeType | null>(
-    null
-  );
-
-  useEffect(() => {
-    // const fetchAnimeByIdData = async (mal_id: number) => {
-    //   try {
-    //     const { data: response } = await axios.get(
-    //       `https://api.jikan.moe/v4/anime/${mal_id}`
-    //     );
-    //     setWatchedAnime(response.data);
-    //   } catch (error) {
-    //     console.error("AnimeById error");
-    //   }
-    // };
-    // fetchAnimeByIdData(mal_id);
-  }, []);
+const WatchedAnimeCard = ({ mal_id }: WatchedAnimeType) => {
+  const { data } = useGetAnimeByIdQuery(mal_id ?? skipToken);
 
   return (
     <div className="watched-anime-card">
       <img
         className="watched-anime-card__image"
-        src={watchedAnime?.images?.webp.image_url}
-        alt={watchedAnime?.title}
+        src={data?.data?.images?.webp?.image_url}
+        alt={data?.data?.title}
       />
-      <p className="watched-anime-card__title">{watchedAnime?.title}</p>
+      <p className="watched-anime-card__title">{data?.data?.title}</p>
       <p>
         Rate: <strong>8/10</strong>
       </p>

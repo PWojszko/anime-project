@@ -1,18 +1,17 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 
 //types
 import anime from "../types/anime";
 
 // redux
-import { useGetAnimeListQuery, useLazyGetAnimeListQuery } from "../redux/api";
+import { useLazyGetAnimeListQuery } from "../redux/api";
 
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
   const [searchedAnime, setSearchedAnime] = useState<anime>();
-  const [trigger, result, lastPromiseInfo] = useLazyGetAnimeListQuery();
+  const [trigger, result] = useLazyGetAnimeListQuery();
 
   const handleSearch = (e: {
     target: { value: React.SetStateAction<string> };

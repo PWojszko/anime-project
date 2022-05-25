@@ -1,26 +1,28 @@
 .header {
-  position: relative;
-
+  z-index: 1;
   .header__button {
     position: absolute;
-    inset: auto 50px -75px auto;
+    inset: 0 $padding-1 auto auto;
     width: 50px;
     height: 50px;
     z-index: 1;
 
-    float: right;
     transition: all 0.3s;
     background-color: $color-dark-2;
-    margin-right: -$padding-1;
-    border-radius: $radius-1 0 0 $radius-1;
-    transform: translate(0, -50%) rotate(-90deg);
+
+    border-radius: 0 $radius-1 $radius-1 0;
+    transform: rotate(90deg);
     cursor: pointer;
 
     @include md {
       position: sticky;
-      inset: 50% auto auto auto;
+      top: 50%;
       width: 50px;
       height: 50px;
+      margin-right: -$padding-1;
+      float: right;
+
+      border-radius: $radius-1 0 0 $radius-1;
       transform: translate(0, -50%);
     }
 

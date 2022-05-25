@@ -1,17 +1,35 @@
 .header {
-  background-color: $color-dark-1;
+  position: fixed;
+  inset: 0;
   padding: $padding-1;
+
+  overflow: hidden;
   transition: all 0.5s;
+
+  @include md {
+    position: relative;
+    background-color: $color-dark-1;
+    overflow: visible;
+  }
 
   .header__logo-container {
     margin-bottom: $padding-1;
+    width: 115px;
+
+    @include md {
+      width: 100%;
+    }
 
     .header__logo {
       font-size: 30px;
-      text-align: center;
       font-weight: lighter;
       transition: all 0.3s;
       white-space: nowrap;
+
+      @include md {
+        font-size: 15px;
+        text-align: center;
+      }
 
       &--bold {
         display: inline-block;
@@ -122,51 +140,36 @@
 
   &--inactive {
     height: 85px;
+
+    @include md {
+      width: 100px;
+      height: 100%;
+    }
+
+    .search {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .navigation {
+      opacity: 0;
+
+      @include md {
+        margin-left: -100%;
+      }
+    }
   }
 
   &--active {
-    height: 400px;
+    height: 100vh;
+    background-color: $color-dark-1;
+
+    @include md {
+      width: 300px;
+      height: 100%;
+    }
 
     .search {
       opacity: 1;
-    }
-  }
-
-  @include md {
-    &--inactive {
-      width: 100px;
-      height: 100%;
-
-      .header__logo-container {
-        margin-bottom: $padding-1;
-
-        .header__logo {
-          font-size: 15px;
-        }
-      }
-
-      .search {
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      .navigation {
-        .button {
-          opacity: 0;
-          width: 0;
-          padding: 0;
-          pointer-events: none;
-        }
-      }
-    }
-
-    &--active {
-      width: 300px;
-      height: 100%;
-
-      .search {
-        opacity: 1;
-      }
     }
   }
 }

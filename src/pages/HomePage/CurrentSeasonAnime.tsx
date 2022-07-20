@@ -21,16 +21,18 @@ const CurrentSeasonAnime = () => {
     isLoading && !error ? (
       <p>Loading</p>
     ) : (
-      <Link key={anime?.mal_id} to={`/anime/${anime?.mal_id}`}>
+      <div className="carousel__item-container">
         <div className="carousel__item">
-          <p className="carousel__item-title">{anime?.title}</p>
-          <img
-            className="carousel__item-image"
-            src={anime?.images?.webp?.image_url}
-            alt={anime?.title}
-          />
+          <Link key={anime?.mal_id} to={`/anime/${anime?.mal_id}`}>
+            <p className="carousel__item-title">{anime?.title}</p>
+            <img
+              className="carousel__item-image"
+              src={anime?.images?.webp?.image_url}
+              alt={anime?.title}
+            />
+          </Link>
         </div>
-      </Link>
+      </div>
     )
   );
 

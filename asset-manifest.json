@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/ani-me/static/css/main.c4ca3a38.css",
-    "main.js": "/ani-me/static/js/main.49bea6ea.js",
+    "main.js": "/ani-me/static/js/main.5285c718.js",
     "static/media/hero-bg.webp": "/ani-me/static/media/hero-bg.756a47559bd1d9b4f9ee.webp",
     "static/media/placeholder.webp": "/ani-me/static/media/placeholder.756a47559bd1d9b4f9ee.webp",
     "index.html": "/ani-me/index.html",
     "main.c4ca3a38.css.map": "/ani-me/static/css/main.c4ca3a38.css.map",
-    "main.49bea6ea.js.map": "/ani-me/static/js/main.49bea6ea.js.map"
+    "main.5285c718.js.map": "/ani-me/static/js/main.5285c718.js.map"
   },
   "entrypoints": [
     "static/css/main.c4ca3a38.css",
-    "static/js/main.49bea6ea.js"
+    "static/js/main.5285c718.js"
   ]
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 
 // context
 import AuthContextProvider from "./contexts/AuthContext";
@@ -19,7 +19,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <Provider store={store}>
         <AuthContextProvider>
           <RWDContextProvider>
@@ -27,7 +27,7 @@ root.render(
           </RWDContextProvider>
         </AuthContextProvider>
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
 

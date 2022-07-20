@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/anime-project/static/css/main.f966d446.css",
-    "main.js": "/anime-project/static/js/main.e366cd45.js",
-    "static/media/hero-bg.webp": "/anime-project/static/media/hero-bg.756a47559bd1d9b4f9ee.webp",
-    "static/media/placeholder.webp": "/anime-project/static/media/placeholder.756a47559bd1d9b4f9ee.webp",
-    "index.html": "/anime-project/index.html",
-    "main.f966d446.css.map": "/anime-project/static/css/main.f966d446.css.map",
-    "main.e366cd45.js.map": "/anime-project/static/js/main.e366cd45.js.map"
+    "main.css": "/ani-me/static/css/main.c4ca3a38.css",
+    "main.js": "/ani-me/static/js/main.a5ca936e.js",
+    "static/media/hero-bg.webp": "/ani-me/static/media/hero-bg.756a47559bd1d9b4f9ee.webp",
+    "static/media/placeholder.webp": "/ani-me/static/media/placeholder.756a47559bd1d9b4f9ee.webp",
+    "index.html": "/ani-me/index.html",
+    "main.c4ca3a38.css.map": "/ani-me/static/css/main.c4ca3a38.css.map",
+    "main.a5ca936e.js.map": "/ani-me/static/js/main.a5ca936e.js.map"
   },
   "entrypoints": [
-    "static/css/main.f966d446.css",
-    "static/js/main.e366cd45.js"
+    "static/css/main.c4ca3a38.css",
+    "static/js/main.a5ca936e.js"
   ]
 }

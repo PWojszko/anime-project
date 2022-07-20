@@ -19,7 +19,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename={"https://pwojszko.github.io/ani-me"}>
+    <BrowserRouter basename={"https://pwojszko.github.io/ani-me/"}>
       <Provider store={store}>
         <AuthContextProvider>
           <RWDContextProvider>
